@@ -1,10 +1,41 @@
 @import "tailwindcss";
 
+:root {
+  --color-primary: #c8102e;
+  --color-foreground: #111827;
+  --color-background: #ffffff;
+  --color-muted: #f8fafc;
+  --color-border: #e5e7eb;
+}
+
 html,
 body {
   min-height: 100%;
 }
 
+html {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
 body {
   margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body), Inter, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), Manrope, sans-serif;
+}
+
+*,
+::before,
+::after {
+  border-color: var(--color-border);
 }
