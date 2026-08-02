@@ -3,6 +3,8 @@ import Footer from "../components/layout/Footer";
 import Hero from "../components/sections/Hero";
 import Problems from "../components/sections/Problems";
 import FeaturedProducts from "../components/sections/FeaturedProducts";
+import ManufacturingExcellence from "../components/sections/ManufacturingExcellence";
+import Industries from "../components/sections/Industries";
 import WhyConchem from "../components/sections/WhyConchem";
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
       <Hero />
       <Problems />
       <FeaturedProducts />
+      <ManufacturingExcellence />
+      <Industries />
       <WhyConchem />
       <Footer />
     </main>
