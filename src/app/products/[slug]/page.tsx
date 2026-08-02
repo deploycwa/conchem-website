@@ -26,6 +26,7 @@ import { company } from "@/data/company";
 import {
   getProductBySlug,
   getRelatedProducts,
+  products,
   type ApplicationArea,
   type ProductCategory,
 } from "@/data/products";
@@ -35,6 +36,12 @@ type ProductDetailPageProps = {
     slug: string;
   }>;
 };
+
+export function generateStaticParams() {
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
 
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
   const { slug } = await params;

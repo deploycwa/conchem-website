@@ -7,11 +7,13 @@ import { images } from "@/data/images";
 
 const manrope = Manrope({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-heading",
 });
 
 const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
   variable: "--font-body",
 });
 
