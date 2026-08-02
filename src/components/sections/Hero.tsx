@@ -16,8 +16,13 @@ export default function Hero() {
             </p>
 
             <h1 className="mt-4 max-w-xl text-[clamp(2.25rem,4.4vw,4.1rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
-              Making Your Dream Home Healthy &amp; Strong.
+              {company.tagline}
             </h1>
+
+            {/* Mobile-only: image between title and paragraph */}
+            <div className="mt-6 lg:hidden">
+              <HeroImage />
+            </div>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
               Premium construction chemicals engineered for waterproofing, repair, bonding, and
@@ -49,7 +54,8 @@ export default function Hero() {
             </ul>
           </div>
 
-          <div className="order-2 lg:order-none">
+          {/* Desktop-only: image in right column */}
+          <div className="hidden lg:block order-2 lg:order-none">
             <HeroImage />
           </div>
         </div>

@@ -11,7 +11,7 @@ export const images = {
     alt: "Conchem International",
   },
   hero: {
-    primary: "",
+    primary: "/images/hero/hero.png",
     alt: "Conchem International Waterproofing & Construction Chemicals",
     directory: "/images/hero/",
   },

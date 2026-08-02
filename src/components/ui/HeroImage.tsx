@@ -23,7 +23,7 @@ export default function HeroImage({
   return (
     <div
       className={cn(
-        "relative flex min-h-[320px] h-full w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]",
+        "relative flex h-[320px] w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:h-[420px] lg:h-[560px]",
         className
       )}
     >

@@ -11,11 +11,11 @@ export const company = {
   // ---------------------------------------------------------------------------
   name: "Conchem International",
   shortName: "Conchem",
-  tagline: "Making Your Dream Home Healthy & Strong.",
+  tagline: "Making Your Dream Home Healthy & Strong",
   foundedYear: 2001,
 
   description:
-    "Conchem International — Making Your Dream Home Healthy & Strong. Premium construction chemicals for waterproofing, repair, bonding, flooring, and structural protection.",
+    "Premium construction chemicals for waterproofing, repair, bonding, flooring, and structural protection — trusted by builders, contractors, and homeowners across Eastern and North-Eastern India.",
 
   descriptionLong:
     "Conchem International has grown by focusing on dependable manufacturing, practical product performance and the day-to-day needs of construction teams. We make waterproofing and construction chemical solutions designed for real site conditions, with an emphasis on consistency, support and long-term value.",

@@ -29,7 +29,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 text-sm leading-6 text-[#4B5563]">
-              {company.description}
+              {company.tagline}
             </p>
           </div>
 
