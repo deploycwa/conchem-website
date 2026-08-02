@@ -51,6 +51,7 @@ const productCategories = [
 
 const catalogProducts = [
   {
+    slug: "latex-m-p",
     name: "Latex M.P.",
     category: "Waterproofing",
     description:
@@ -59,6 +60,7 @@ const catalogProducts = [
     icon: Droplets,
   },
   {
+    slug: "plastomix",
     name: "Plastomix",
     category: "Admixtures",
     description:
@@ -67,6 +69,7 @@ const catalogProducts = [
     icon: FlaskConical,
   },
   {
+    slug: "rust-stop",
     name: "Rust Stop",
     category: "Repair Mortars",
     description:
@@ -75,6 +78,7 @@ const catalogProducts = [
     icon: ShieldCheck,
   },
   {
+    slug: "bond-plus",
     name: "Bond Plus",
     category: "Primers",
     description:
@@ -83,6 +87,7 @@ const catalogProducts = [
     icon: Slash,
   },
   {
+    slug: "tile-fix",
     name: "Tile Fix",
     category: "Tile Adhesives",
     description:
@@ -91,6 +96,7 @@ const catalogProducts = [
     icon: Layers3,
   },
   {
+    slug: "prime-coat",
     name: "Prime Coat",
     category: "Primers",
     description:
@@ -99,6 +105,7 @@ const catalogProducts = [
     icon: Paintbrush,
   },
   {
+    slug: "crack-seal",
     name: "Crack Seal",
     category: "Repair Mortars",
     description:
@@ -107,6 +114,7 @@ const catalogProducts = [
     icon: Wrench,
   },
   {
+    slug: "flex-bond",
     name: "Flex Bond",
     category: "Waterproofing",
     description:
@@ -115,6 +123,7 @@ const catalogProducts = [
     icon: Droplets,
   },
   {
+    slug: "damp-shield",
     name: "Damp Shield",
     category: "Waterproofing",
     description:
@@ -314,10 +323,12 @@ export default function ProductsPage() {
               const Icon = product.icon;
 
               return (
-                <article
+                <Link
                   key={product.name}
-                  className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
+                  href={`/products/${product.slug}`}
+                  className="group block rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                 >
+                  <article>
                   <div className="aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4">
                     <div className="flex h-full w-full items-center justify-center rounded-[1rem] border border-dashed border-[#D1D5DB] bg-white text-center">
                       <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280]">
@@ -350,14 +361,12 @@ export default function ProductsPage() {
                     ))}
                   </div>
 
-                  <Link
-                    href="#contact"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]"
-                  >
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]">
                     <span>View Details</span>
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
+                  </span>
+                  </article>
+                </Link>
               );
             })}
           </div>

@@ -17,9 +17,9 @@ import Container from "../../../components/ui/Container";
 import { Button } from "@/components/ui/button";
 
 type ProductDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 type ProductDetail = {
@@ -151,8 +151,9 @@ function slugToKey(slug: string) {
   return slug.toLowerCase();
 }
 
-export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const product = productCatalog[slugToKey(params.slug)] ?? productCatalog["latex-m-p"];
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+  const resolvedParams = await params;
+  const product = productCatalog[slugToKey(resolvedParams.slug)] ?? productCatalog["latex-m-p"];
 
   return (
     <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
