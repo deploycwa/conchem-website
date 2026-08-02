@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Container from "../ui/Container";
+import Logo from "../ui/Logo";
 import { company } from "@/data/company";
 
 const productLinks = [
@@ -22,10 +23,10 @@ export default function Footer() {
     <footer className="border-t border-[#E5E7EB] bg-white">
       <Container>
         <div className="grid gap-10 py-10 sm:py-12 lg:grid-cols-4 lg:gap-8 lg:py-14">
-          <div className="max-w-xs">
-            <div className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-4 py-2 text-sm font-semibold tracking-[0.08em] text-[#111827]">
-              {company.shortName.toUpperCase()}
-            </div>
+          <div className="max-w-sm">
+            <Link href="/" className="inline-flex items-center">
+              <Logo size="lg" />
+            </Link>
 
             <p className="mt-4 text-sm leading-6 text-[#4B5563]">
               {company.description}

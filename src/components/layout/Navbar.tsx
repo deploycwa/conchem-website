@@ -1,19 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import Container from "../ui/Container";
+import Logo from "../ui/Logo";
 
 const navigationItems = [
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
   { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -97,15 +96,8 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-50 hidden h-20 border-b border-[#E5E7EB] bg-white md:block">
         <Container className="flex h-full items-center gap-8">
-          <Link href="/" className="flex shrink-0 items-center">
-            <Image
-              src="/conchem-logo-placeholder.svg"
-              alt="Conchem International"
-              width={144}
-              height={37}
-              priority
-              className="h-[37px] w-auto"
-            />
+          <Link href="/" className="flex shrink-0 items-center pl-1 sm:pl-2">
+            <Logo size="md" priority />
           </Link>
 
           <nav aria-label="Primary" className="flex flex-1 items-center justify-center">
@@ -140,14 +132,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 border-b border-[#E5E7EB] bg-white md:hidden">
         <Container className="flex h-16 items-center justify-between">
           <Link href="/" className="flex shrink-0 items-center">
-            <Image
-              src="/conchem-logo-placeholder.svg"
-              alt="Conchem International"
-              width={128}
-              height={33}
-              priority
-              className="h-[33px] w-auto"
-            />
+            <Logo size="sm" priority />
           </Link>
 
           <button
