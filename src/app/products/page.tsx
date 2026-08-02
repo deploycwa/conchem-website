@@ -327,12 +327,18 @@ export default function ProductsPage() {
                   </p>
 
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {product.packageSizes.map((size) => (
+                    {(
+                      (product.variants as { size: string; mrp?: number }[] | undefined) ??
+                      product.packageSizes.map((s) => ({ size: s } as { size: string; mrp?: number }))
+                    ).map((v) => (
                       <span
-                        key={size}
+                        key={v.size}
                         className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-medium text-[#374151]"
                       >
-                        {size}
+                        {v.size}
+                        {typeof v.mrp === "number" ? (
+                          <span className="ml-2 text-[#6B7280]">— ₹{v.mrp.toFixed(2)}</span>
+                        ) : null}
                       </span>
                     ))}
                   </div>
@@ -347,14 +353,6 @@ export default function ProductsPage() {
             })}
           </div>
 
-          <div className="mt-8 flex justify-center">
-            <Button
-              type="button"
-              className="h-12 rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
-            >
-              View All Products
-            </Button>
-          </div>
         </Container>
       </section>
       </main>

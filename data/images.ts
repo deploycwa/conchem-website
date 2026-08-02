@@ -18,19 +18,89 @@ export const images = {
   products: {
     directory: "/images/products/",
     bySlug: {
-      "latex-m-p": { src: "", alt: "Latex M.P. Waterproofing Additive" },
-      plastomix: { src: "", alt: "Plastomix Mortar Admixture" },
-      "rust-stop": { src: "", alt: "Rust Stop Reinforcement Protection" },
-      "bond-plus": { src: "", alt: "Bond Plus Bonding Primer" },
-      "tile-fix": { src: "", alt: "Tile Fix Adhesive" },
-      "prime-coat": { src: "", alt: "Prime Coat Surface Primer" },
-      "crack-seal": { src: "", alt: "Crack Seal Repair Mortar" },
-      "flex-bond": { src: "", alt: "Flex Bond Waterproofing Agent" },
-      "damp-shield": { src: "", alt: "Damp Shield Protection Coating" },
-    } as Record<string, { src?: string; alt?: string }>,
+      "latex-m-p": {
+        src: "/images/products/latex1.png",
+        alt: "Latex M.P. Waterproofing Additive",
+        gallery: [
+          "/images/products/latex1.png",
+          "/images/products/latex2.png",
+          "/images/products/latex3.png",
+          "/images/products/latex4.png",
+        ],
+      },
+      "plastomix": {
+        src: "/images/products/plastomix1.png",
+        alt: "Plastomix Mortar Admixture",
+        gallery: [
+          "/images/products/plastomix1.png",
+          "/images/products/plastomix2.png",
+          "/images/products/plastomix3.png",
+        ],
+      },
+      "rust-stop": {
+        src: "/images/products/ruststop1.png",
+        alt: "Rust Stop Reinforcement Protection",
+        gallery: [
+          "/images/products/ruststop1.png",
+          "/images/products/ruststop2.png",
+          "/images/products/ruststop3.png",
+        ],
+      },
+      "damposeal-powder": {
+        src: "/images/products/dp1.png",
+        alt: "Damposeal Powder Waterproofing Additive",
+        gallery: [
+          "/images/products/dp1.png",
+          "/images/products/dp2.png",
+          "/images/products/dp3.png",
+        ],
+      },
+      "damposeal-liquid": {
+        src: "/images/products/dl1.png",
+        alt: "Damposeal Liquid Integral Waterproofing",
+        gallery: [
+          "/images/products/dl1.png",
+          "/images/products/dl2.png",
+          "/images/products/dl3.png",
+        ],
+      },
+      "damposeal-liquid-gold": {
+        src: "/images/products/dlgold1.png",
+        alt: "Damposeal Liquid Gold Premium Waterproofing",
+        gallery: [
+          "/images/products/dlgold1.png",
+          "/images/products/dlgold2.png",
+          "/images/products/dlgold3.png",
+        ],
+      },
+      "de-rusto": {
+        src: "/images/products/derusto1.png",
+        alt: "De-Rusto Rust Removal Solution",
+        gallery: [
+          "/images/products/derusto1.png",
+          "/images/products/derusto2.png",
+          "/images/products/derusto3.png",
+          "/images/products/derusto4.png",
+        ],
+      },
+      "tile-o-mate": {
+        src: "/images/products/tileomate1.png",
+        alt: "Tile-o-mate Tile Adhesive Additive",
+        gallery: [
+          "/images/products/tileomate1.png",
+          "/images/products/tileomate2.png",
+          "/images/products/tileomate3.png",
+        ],
+      },
+      "epoxy-bond-master": {
+        src: "/images/products/ebm1.png",
+        alt: "Epoxy Bond Master Bonding Agent",
+        gallery: ["/images/products/ebm1.png"],
+      },
+    } as Record<string, { src?: string; alt?: string; gallery?: string[] }>,
   },
   industries: {
-    primary: "",
+    primary: "/images/industries/industries.png",
     alt: "Conchem Construction Chemicals Across Industries",
     directory: "/images/industries/",
     byCategory: {
@@ -43,7 +113,7 @@ export const images = {
     } as Record<string, { src?: string; alt?: string }>,
   },
   factory: {
-    primary: "",
+    primary: "/images/factory/factory.png",
     alt: "Conchem Manufacturing Facility & Factory",
     directory: "/images/factory/",
   },

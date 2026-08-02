@@ -20,8 +20,7 @@ const variantOuterStyles: Record<ProductImageVariant, string> = {
   card: "aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4",
   featured:
     "flex min-h-[260px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#FBFBFB] p-4 sm:min-h-[320px] lg:min-h-[360px]",
-  detail:
-    "flex min-h-[360px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-4 sm:min-h-[460px] lg:min-h-[620px]",
+  detail: "rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-4",
 };
 
 const variantInnerStyles: Record<ProductImageVariant, string> = {
@@ -49,14 +48,14 @@ export default function ProductImage({
   return (
     <div className={cn(variantOuterStyles[variant], className)}>
       {hasRealImage ? (
-        <div className="relative h-full w-full overflow-hidden rounded-[1rem]">
+        <div className="relative aspect-square w-full overflow-hidden rounded-[1rem]">
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
             sizes={
               variant === "detail"
-                ? "(max-width: 1024px) 100vw, 45vw"
+                ? "(max-width: 1024px) 100vw, 50vw"
                 : variant === "featured"
                 ? "(max-width: 1024px) 100vw, 50vw"
                 : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
@@ -64,7 +63,11 @@ export default function ProductImage({
             priority={priority}
             placeholder={blurDataURL ? "blur" : "empty"}
             blurDataURL={blurDataURL}
-            className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+            className={cn(
+              variant === "detail"
+                ? "object-cover object-center"
+                : "object-cover object-center transition-transform duration-300 group-hover:scale-105"
+            )}
           />
         </div>
       ) : (

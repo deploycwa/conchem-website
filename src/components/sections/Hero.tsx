@@ -3,13 +3,14 @@ import { CheckCircle2 } from "lucide-react";
 
 import Container from "../ui/Container";
 import HeroImage from "../ui/HeroImage";
+import MotionSection from "../ui/MotionSection";
 import { company } from "@/data/company";
 
 export default function Hero() {
   return (
     <section className="py-8 sm:py-10 lg:py-14">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-center lg:gap-10">
+        <MotionSection direction="bottom" className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-center lg:gap-10">
           <div className="order-1 max-w-2xl lg:order-none">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#6B7280] sm:text-sm">
               {company.name}
@@ -55,10 +56,10 @@ export default function Hero() {
           </div>
 
           {/* Desktop-only: image in right column */}
-          <div className="hidden lg:block order-2 lg:order-none">
-            <HeroImage />
+          <div className="hidden lg:flex order-2 lg:order-none items-center">
+            <HeroImage className="w-full" />
           </div>
-        </div>
+        </MotionSection>
       </Container>
     </section>
   );

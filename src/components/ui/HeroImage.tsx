@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { durations, prefersReduceMotion } from "../../lib/motion";
 
 import { images } from "@/data/images";
 import { cn } from "@/lib/utils";
@@ -29,16 +33,23 @@ export default function HeroImage({
     >
       {hasRealImage ? (
         <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
-          <Image
-            src={src!}
-            alt={alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 45vw"
-            priority={priority}
-            placeholder={blurDataURL ? "blur" : "empty"}
-            blurDataURL={blurDataURL}
-            className="object-cover object-center"
-          />
+          <motion.div
+            initial={{ scale: 1 }}
+            animate={prefersReduceMotion() ? { scale: 1 } : { scale: [1, 1.05] }}
+            transition={{ duration: durations.ambientZoom, repeat: Infinity, repeatType: "mirror", ease: "linear" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={src!}
+              alt={alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              priority={priority}
+              placeholder={blurDataURL ? "blur" : "empty"}
+              blurDataURL={blurDataURL}
+              className="object-cover object-center"
+            />
+          </motion.div>
         </div>
       ) : (
         <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">

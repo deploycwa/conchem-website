@@ -10,15 +10,16 @@ type FactoryImageProps = {
   alt?: string;
   variant?: FactoryImageVariant;
   className?: string;
+  imageClassName?: string;
   priority?: boolean;
   blurDataURL?: string;
 };
 
 const variantOuterStyles: Record<FactoryImageVariant, string> = {
   default:
-    "flex min-h-[320px] h-full w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]",
+    "flex min-h-[320px] w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]",
   compact:
-    "flex min-h-[320px] h-full w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px]",
+    "flex min-h-[320px] w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px]",
 };
 
 export default function FactoryImage({
@@ -26,6 +27,7 @@ export default function FactoryImage({
   alt = images.factory.alt,
   variant = "default",
   className,
+  imageClassName,
   priority = false,
   blurDataURL,
 }: FactoryImageProps) {
@@ -34,7 +36,7 @@ export default function FactoryImage({
   return (
     <div className={cn(variantOuterStyles[variant], className)}>
       {hasRealImage ? (
-        <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
+        <div className="relative min-h-[320px] w-full overflow-hidden rounded-[1.5rem] sm:min-h-[420px] lg:min-h-[560px]">
           <Image
             src={src!}
             alt={alt}
@@ -43,7 +45,7 @@ export default function FactoryImage({
             priority={priority}
             placeholder={blurDataURL ? "blur" : "empty"}
             blurDataURL={blurDataURL}
-            className="object-cover object-center"
+            className={cn("object-cover object-center", imageClassName)}
           />
         </div>
       ) : (

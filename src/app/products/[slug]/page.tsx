@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -21,9 +22,11 @@ import { notFound } from "next/navigation";
 import Footer from "../../../components/layout/Footer";
 import Navbar from "../../../components/layout/Navbar";
 import Container from "../../../components/ui/Container";
+import ProductDetailGallery from "../../../components/ui/ProductDetailGallery";
 import ProductImage from "../../../components/ui/ProductImage";
 import { Button } from "@/components/ui/button";
 import { company } from "@/data/company";
+import { images } from "@/data/images";
 import {
   getProductBySlug,
   getRelatedProducts,
@@ -129,6 +132,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   const relatedProducts = getRelatedProducts(product);
   const categoryIcon = getCategoryIcon(product.category);
+  const productGallery = images.products.bySlug[product.slug]?.gallery ?? [];
+  const thumbnailGallery = productGallery.slice(1);
 
   // Graceful fallbacks for optional/array fields
   const features = product.features ?? [];
@@ -161,25 +166,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         <Container>
           <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
             <div className="order-1 lg:order-none">
-              <ProductImage
-                slug={product.slug}
+              <ProductDetailGallery
+                productName={product.name}
                 placeholderText={product.imagePlaceholder}
-                variant="detail"
-                priority
+                gallery={productGallery}
               />
-
-              <div className="mt-4 grid grid-cols-3 gap-3 sm:gap-4">
-                {[1, 2, 3].map((thumb) => (
-                  <div
-                    key={thumb}
-                    className="flex aspect-square items-center justify-center rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] px-4 py-4"
-                  >
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#6B7280] text-center">
-                      THUMBNAIL
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="order-2 max-w-2xl lg:order-none">
@@ -208,12 +199,16 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               )}
 
               <div className="mt-6 flex flex-wrap gap-2">
-                {product.packageSizes.map((size) => (
+                {(
+                  (product.variants as { size: string; mrp?: number }[] | undefined) ??
+                  product.packageSizes.map((s) => ({ size: s } as { size: string; mrp?: number }))
+                ).map((v) => (
                   <span
-                    key={size}
+                    key={v.size}
                     className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-medium text-[#374151]"
                   >
-                    {size}
+                    {v.size}
+                    {typeof v.mrp === "number" ? <span className="ml-2 text-[#6B7280]">— ₹{v.mrp.toFixed(2)}</span> : null}
                   </span>
                 ))}
               </div>

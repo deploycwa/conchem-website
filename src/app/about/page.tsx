@@ -224,7 +224,12 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-10">
             <div className="order-1 lg:order-none">
-              <FactoryImage variant="compact" />
+              <FactoryImage
+                src="/images/factory/quality.png"
+                alt="Conchem Quality"
+                variant="compact"
+                imageClassName="object-cover object-right"
+              />
             </div>
 
             <div className="order-2 lg:order-none">

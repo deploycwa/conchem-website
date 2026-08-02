@@ -18,7 +18,7 @@ type IndustryImageProps = {
 
 const variantOuterStyles: Record<IndustryImageVariant, string> = {
   hero:
-    "flex min-h-[320px] h-full w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]",
+    "flex min-h-[320px] w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-2 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]",
   card:
     "aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4",
 };
@@ -42,7 +42,7 @@ export default function IndustryImage({
   return (
     <div className={cn(variantOuterStyles[variant], className)}>
       {hasRealImage ? (
-        <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
+        <div className="relative min-h-[320px] w-full overflow-hidden rounded-[1.5rem] sm:min-h-[420px] lg:min-h-[560px]">
           <Image
             src={imageSrc}
             alt={imageAlt}
