@@ -43,16 +43,18 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
+    <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
       <Navbar />
-      <Hero />
-      <Problems />
-      <FeaturedProducts />
-      <ManufacturingExcellence />
-      <Industries />
-      <WhyConchem />
-      <CallToAction />
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
+        <Hero />
+        <Problems />
+        <FeaturedProducts />
+        <ManufacturingExcellence />
+        <Industries />
+        <WhyConchem />
+        <CallToAction />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }

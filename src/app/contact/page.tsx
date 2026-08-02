@@ -88,8 +88,9 @@ const faqItems = [
 
 export default function ContactPage() {
   return (
-    <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
+    <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
       <Navbar />
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
@@ -192,7 +193,7 @@ export default function ContactPage() {
                       <label htmlFor="name" className="text-sm font-semibold text-[#111827]">
                         Name
                       </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4">
+                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
                         <User className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
                         <input
                           id="name"
@@ -207,7 +208,7 @@ export default function ContactPage() {
                       <label htmlFor="company" className="text-sm font-semibold text-[#111827]">
                         Company
                       </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4">
+                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
                         <BriefcaseBusiness className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
                         <input
                           id="company"
@@ -224,7 +225,7 @@ export default function ContactPage() {
                       <label htmlFor="email" className="text-sm font-semibold text-[#111827]">
                         Email
                       </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4">
+                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
                         <Mail className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
                         <input
                           id="email"
@@ -239,7 +240,7 @@ export default function ContactPage() {
                       <label htmlFor="phone" className="text-sm font-semibold text-[#111827]">
                         Phone
                       </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4">
+                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
                         <Phone className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
                         <input
                           id="phone"
@@ -255,7 +256,7 @@ export default function ContactPage() {
                     <label htmlFor="product-interest" className="text-sm font-semibold text-[#111827]">
                       Product Interest
                     </label>
-                    <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4">
+                    <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
                       <MessageSquare className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
                       <input
                         id="product-interest"
@@ -274,13 +275,13 @@ export default function ContactPage() {
                       id="message"
                       rows={6}
                       placeholder="Tell us about your project"
-                      className="mt-2 w-full rounded-[1.5rem] border border-[#D1D5DB] bg-white px-4 py-3 text-sm text-[#111827] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[#C8102E]"
+                      className="mt-2 w-full rounded-[1.5rem] border border-[#D1D5DB] bg-white px-4 py-3 text-sm text-[#111827] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[#C8102E] focus:ring-2 focus:ring-[#C8102E]/20"
                     />
                   </div>
 
                   <Button
-                    type="button"
-                    className="h-12 w-full rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
+                    type="submit"
+                    className="h-12 w-full rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937] focus-visible:ring-2 focus-visible:ring-[#C8102E]"
                   >
                     Submit
                   </Button>
@@ -333,8 +334,9 @@ export default function ContactPage() {
         secondaryLabel="Browse Products"
         secondaryHref="/products"
       />
+      </main>
 
       <Footer />
-    </main>
+    </div>
   );
 }

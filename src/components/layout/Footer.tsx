@@ -24,7 +24,7 @@ export default function Footer() {
       <Container>
         <div className="grid gap-10 py-10 sm:py-12 lg:grid-cols-4 lg:gap-8 lg:py-14">
           <div className="max-w-sm">
-            <Link href="/" className="inline-flex items-center">
+            <Link href="/" aria-label="Conchem International Home" className="inline-flex items-center">
               <Logo size="lg" />
             </Link>
 

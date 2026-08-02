@@ -14,6 +14,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
 import ProductImage from "../../components/ui/ProductImage";
@@ -113,8 +114,9 @@ function getCategoryIcon(category: ProductCategory): LucideIcon {
 
 export default function ProductsPage() {
   return (
-    <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
+    <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
       <Navbar />
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
@@ -301,6 +303,7 @@ export default function ProductsPage() {
                 <Link
                   key={product.slug}
                   href={`/products/${product.slug}`}
+                  aria-label={`View details for ${product.name}`}
                   className="group block rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                 >
                   <article>
@@ -354,6 +357,8 @@ export default function ProductsPage() {
           </div>
         </Container>
       </section>
-    </main>
+      </main>
+      <Footer />
+    </div>
   );
 }

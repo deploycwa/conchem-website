@@ -96,7 +96,7 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-50 hidden h-20 border-b border-[#E5E7EB] bg-white md:block">
         <Container className="flex h-full items-center gap-8">
-          <Link href="/" className="flex shrink-0 items-center pl-1 sm:pl-2">
+          <Link href="/" aria-label="Conchem International Home" className="flex shrink-0 items-center pl-1 sm:pl-2">
             <Logo size="md" priority />
           </Link>
 
@@ -131,7 +131,7 @@ export default function Navbar() {
 
       <header className="sticky top-0 z-50 border-b border-[#E5E7EB] bg-white md:hidden">
         <Container className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex shrink-0 items-center">
+          <Link href="/" aria-label="Conchem International Home" className="flex shrink-0 items-center">
             <Logo size="sm" priority />
           </Link>
 

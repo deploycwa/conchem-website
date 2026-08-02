@@ -73,6 +73,7 @@ export default function FeaturedProducts() {
 
                     <Link
                       href={`/products/${product.slug}`}
+                      aria-label={`Explore ${product.name}`}
                       className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
                     >
                       <span>Explore Product</span>

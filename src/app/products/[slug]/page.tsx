@@ -123,8 +123,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   const categoryIcon = getCategoryIcon(product.category);
 
   return (
-    <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
+    <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
       <Navbar />
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
@@ -395,7 +396,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </Container>
       </section>
 
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }

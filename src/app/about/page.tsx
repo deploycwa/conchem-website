@@ -57,8 +57,9 @@ const coreValues = [
 
 export default function AboutPage() {
   return (
-    <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
+    <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
       <Navbar />
+      <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10">
@@ -311,7 +312,8 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }
