@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,7 +17,41 @@ import { Button } from "@/components/ui/button";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
 import ProductImage from "../../components/ui/ProductImage";
+import { company } from "@/data/company";
 import { products, type ProductCategory } from "@/data/products";
+
+export const metadata: Metadata = {
+  title: "Products",
+  description:
+    "Explore our range of high-performance waterproofing chemicals, mortar admixtures, repair mortars, tile adhesives, grouts, and primers.",
+  keywords: [
+    "waterproofing products",
+    "mortar admixtures",
+    "repair mortars",
+    "tile adhesives",
+    "grouts",
+    "primers",
+    "construction chemicals catalog",
+  ],
+  alternates: {
+    canonical: "/products",
+  },
+  openGraph: {
+    title: `Products | ${company.name}`,
+    description:
+      "Explore our range of high-performance waterproofing chemicals, mortar admixtures, repair mortars, tile adhesives, grouts, and primers.",
+    url: "/products",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Products | ${company.name}`,
+    description:
+      "Explore our range of high-performance waterproofing chemicals, mortar admixtures, repair mortars, tile adhesives, grouts, and primers.",
+  },
+};
 
 // -----------------------------------------------------------------------------
 // Category display config (icon is a UI concern — kept in the page layer)

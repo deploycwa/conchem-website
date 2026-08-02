@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import React from "react";
 import Link from "next/link";
 import {
@@ -21,6 +22,7 @@ import Navbar from "../../../components/layout/Navbar";
 import Container from "../../../components/ui/Container";
 import ProductImage from "../../../components/ui/ProductImage";
 import { Button } from "@/components/ui/button";
+import { company } from "@/data/company";
 import {
   getProductBySlug,
   getRelatedProducts,
@@ -33,6 +35,45 @@ type ProductDetailPageProps = {
     slug: string;
   }>;
 };
+
+export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+    };
+  }
+
+  return {
+    title: product.name,
+    description: product.description,
+    keywords: [
+      product.name,
+      product.category,
+      ...product.applications,
+      "waterproofing chemicals",
+      company.name,
+    ],
+    alternates: {
+      canonical: `/products/${product.slug}`,
+    },
+    openGraph: {
+      title: `${product.name} | ${company.name}`,
+      description: product.description,
+      url: `/products/${product.slug}`,
+      siteName: company.name,
+      locale: "en_IN",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.name} | ${company.name}`,
+      description: product.description,
+    },
+  };
+}
 
 // -----------------------------------------------------------------------------
 // Icon maps (UI concern — kept in the page layer)

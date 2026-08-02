@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import Hero from "../components/sections/Hero";
@@ -7,6 +9,37 @@ import ManufacturingExcellence from "../components/sections/ManufacturingExcelle
 import Industries from "../components/sections/Industries";
 import WhyConchem from "../components/sections/WhyConchem";
 import CallToAction from "../components/sections/CallToAction";
+import { company } from "@/data/company";
+
+export const metadata: Metadata = {
+  title: `${company.name} | ${company.tagline}`,
+  description: company.description,
+  keywords: [
+    "waterproofing chemicals",
+    "construction chemicals",
+    "mortar admixtures",
+    "repair mortars",
+    "tile adhesives",
+    "Siliguri waterproofing",
+    "Eastern India construction",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: `${company.name} | ${company.tagline}`,
+    description: company.description,
+    url: "/",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${company.name} | ${company.tagline}`,
+    description: company.description,
+  },
+};
 
 export default function Home() {
   return (

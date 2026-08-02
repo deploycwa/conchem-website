@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,6 +17,34 @@ import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
 import FactoryImage from "../../components/ui/FactoryImage";
 import { company } from "@/data/company";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: company.descriptionLong,
+  keywords: [
+    "about Conchem",
+    "construction chemical manufacturer",
+    "waterproofing company Siliguri",
+    "Eastern India manufacturer",
+    "building chemicals history",
+  ],
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: `About Us | ${company.name}`,
+    description: company.descriptionLong,
+    url: "/about",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `About Us | ${company.name}`,
+    description: company.descriptionLong,
+  },
+};
 
 const coreValues = [
   { title: "Quality", description: "We prioritize dependable outcomes in every product we make.", icon: BadgeCheck },

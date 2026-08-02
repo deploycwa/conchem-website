@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
+
 import { company } from "@/data/company";
 import { images } from "@/data/images";
 
@@ -14,9 +15,55 @@ const inter = Inter({
   variable: "--font-body",
 });
 
+const baseUrl = new URL(company.website);
+
 export const metadata: Metadata = {
-  title: company.name,
+  metadataBase: baseUrl,
+  title: {
+    default: `${company.name} | ${company.tagline}`,
+    template: `%s | ${company.name}`,
+  },
   description: company.description,
+  keywords: [
+    "waterproofing chemicals",
+    "construction chemicals",
+    "mortar admixtures",
+    "concrete repair mortars",
+    "tile adhesives",
+    "primers",
+    "waterproofing solutions",
+    "Siliguri",
+    "West Bengal",
+    "Eastern India",
+    "North-East India",
+    company.name,
+    company.shortName,
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: company.website,
+    siteName: company.name,
+    title: `${company.name} | ${company.tagline}`,
+    description: company.description,
+    images: [
+      {
+        url: images.logo.badge,
+        width: 1024,
+        height: 724,
+        alt: `${company.name} Logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${company.name} | ${company.tagline}`,
+    description: company.description,
+    images: [images.logo.badge],
+  },
   icons: [
     { rel: "icon", url: images.logo.favicon, sizes: "any" },
     { rel: "icon", url: images.logo.favicon, sizes: "192x192", type: "image/png" },
@@ -24,7 +71,6 @@ export const metadata: Metadata = {
     { rel: "apple-touch-icon", url: images.logo.favicon, sizes: "180x180", type: "image/png" },
   ],
 };
-
 
 export default function RootLayout({
   children,

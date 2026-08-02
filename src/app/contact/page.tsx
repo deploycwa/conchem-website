@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ChevronDown,
@@ -17,6 +18,36 @@ import Navbar from "../../components/layout/Navbar";
 import CallToAction from "../../components/sections/CallToAction";
 import Container from "../../components/ui/Container";
 import { company } from "@/data/company";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get in touch with Conchem International for expert waterproofing guidance, product inquiries, contractor support, and project recommendations.",
+  keywords: [
+    "contact Conchem",
+    "waterproofing helpline",
+    "construction chemical suppliers Siliguri",
+    "Conchem phone email address",
+  ],
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: `Contact Us | ${company.name}`,
+    description:
+      "Get in touch with Conchem International for expert waterproofing guidance, product inquiries, contractor support, and project recommendations.",
+    url: "/contact",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact Us | ${company.name}`,
+    description:
+      "Get in touch with Conchem International for expert waterproofing guidance, product inquiries, contractor support, and project recommendations.",
+  },
+};
 
 
 const contactCards = [

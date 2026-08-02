@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -17,6 +18,37 @@ import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
 import IndustryImage from "../../components/ui/IndustryImage";
+import { company } from "@/data/company";
+
+export const metadata: Metadata = {
+  title: "Industries We Serve",
+  description:
+    "Trusted construction chemical and waterproofing solutions for residential, commercial, industrial, infrastructure, hospitality, and institutional projects.",
+  keywords: [
+    "residential waterproofing",
+    "commercial construction chemicals",
+    "industrial waterproofing",
+    "infrastructure protection",
+  ],
+  alternates: {
+    canonical: "/industries",
+  },
+  openGraph: {
+    title: `Industries We Serve | ${company.name}`,
+    description:
+      "Trusted construction chemical and waterproofing solutions for residential, commercial, industrial, infrastructure, hospitality, and institutional projects.",
+    url: "/industries",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Industries We Serve | ${company.name}`,
+    description:
+      "Trusted construction chemical and waterproofing solutions for residential, commercial, industrial, infrastructure, hospitality, and institutional projects.",
+  },
+};
 
 const industryCards = [
   {

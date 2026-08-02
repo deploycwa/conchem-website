@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowDown,
@@ -17,6 +18,38 @@ import { Button } from "@/components/ui/button";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
+import { company } from "@/data/company";
+
+export const metadata: Metadata = {
+  title: "Solutions",
+  description:
+    "Complete system-based construction solutions for waterproofing, structural repair, concrete protection, tile fixing, and surface preparation.",
+  keywords: [
+    "waterproofing solutions",
+    "structural repair systems",
+    "concrete protection",
+    "surface preparation",
+    "building repair solutions",
+  ],
+  alternates: {
+    canonical: "/solutions",
+  },
+  openGraph: {
+    title: `Solutions | ${company.name}`,
+    description:
+      "Complete system-based construction solutions for waterproofing, structural repair, concrete protection, tile fixing, and surface preparation.",
+    url: "/solutions",
+    siteName: company.name,
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Solutions | ${company.name}`,
+    description:
+      "Complete system-based construction solutions for waterproofing, structural repair, concrete protection, tile fixing, and surface preparation.",
+  },
+};
 
 const solutionCategories = [
   {
