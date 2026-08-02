@@ -16,29 +16,31 @@ import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import CallToAction from "../../components/sections/CallToAction";
 import Container from "../../components/ui/Container";
+import { company } from "@/data/company";
+
 
 const contactCards = [
   {
     title: "Phone",
-    description: "+91 00000 00000",
+    description: company.phone.primary,
     icon: Phone,
-    href: "tel:+910000000000",
+    href: company.phone.primaryHref,
   },
   {
     title: "Email",
-    description: "hello@conchem.com",
+    description: company.email.primary,
     icon: Mail,
-    href: "mailto:hello@conchem.com",
+    href: company.email.primaryHref,
   },
   {
     title: "Office",
-    description: "Siliguri, West Bengal, India",
+    description: company.address.full,
     icon: MapPin,
     href: "/contact",
   },
   {
     title: "Business Hours",
-    description: "Mon - Sat, 9:30 AM to 6:00 PM",
+    description: company.businessHours,
     icon: Clock3,
     href: "/contact",
   },

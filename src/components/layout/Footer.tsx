@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import Container from "../ui/Container";
+import { company } from "@/data/company";
 
 const productLinks = [
   { label: "Latex M.P.", href: "/products" },
@@ -16,13 +17,6 @@ const companyLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const contactItems = [
-  "Conchem International",
-  "Siliguri, West Bengal, India",
-  "hello@conchem.com",
-  "+91 00000 00000",
-];
-
 export default function Footer() {
   return (
     <footer className="border-t border-[#E5E7EB] bg-white">
@@ -30,13 +24,11 @@ export default function Footer() {
         <div className="grid gap-10 py-10 sm:py-12 lg:grid-cols-4 lg:gap-8 lg:py-14">
           <div className="max-w-xs">
             <div className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-4 py-2 text-sm font-semibold tracking-[0.08em] text-[#111827]">
-              CONCHEM
+              {company.shortName.toUpperCase()}
             </div>
 
             <p className="mt-4 text-sm leading-6 text-[#4B5563]">
-              Conchem International manufactures reliable waterproofing and construction chemical
-              solutions for builders, contractors, distributors and homeowners across Eastern and
-              North-Eastern India.
+              {company.description}
             </p>
           </div>
 
@@ -84,15 +76,16 @@ export default function Footer() {
             </h2>
 
             <ul className="mt-4 space-y-3 text-sm text-[#4B5563]">
-              {contactItems.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
+              <li>{company.name}</li>
+              <li>{company.address.full}</li>
+              <li>{company.email.primary}</li>
+              <li>{company.phone.primary}</li>
             </ul>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 border-t border-[#E5E7EB] py-5 text-sm text-[#4B5563] sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Conchem International. All rights reserved.</p>
+          <p>{company.copyright}</p>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/contact" className="transition-colors hover:text-[#C8102E]">

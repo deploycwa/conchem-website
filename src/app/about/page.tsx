@@ -14,22 +14,7 @@ import {
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
-
-const timeline = [
-  { label: "2001", title: "Company Founded" },
-  { label: "Expansion", title: "Regional Growth" },
-  { label: "Today", title: "Serving Construction Teams Across the Region" },
-];
-
-const missionPoints = [
-  "Deliver dependable waterproofing and construction chemical solutions.",
-  "Support builders and homeowners with practical, site-ready products.",
-];
-
-const visionPoints = [
-  "Remain a trusted manufacturing partner for quality-focused projects.",
-  "Strengthen our presence across Eastern and North-Eastern India.",
-];
+import { company } from "@/data/company";
 
 const coreValues = [
   { title: "Quality", description: "We prioritize dependable outcomes in every product we make.", icon: BadgeCheck },
@@ -40,16 +25,6 @@ const coreValues = [
   { title: "Long-Term Partnerships", description: "We aim to build lasting relationships based on trust.", icon: Sparkles },
 ];
 
-const trustPoints = [
-  "Controlled manufacturing processes that support consistency.",
-  "Testing-focused production habits that reinforce quality.",
-  "Reliable supply chain planning for ongoing availability.",
-  "Responsive customer support for project guidance.",
-  "Stable product output across recurring batches.",
-];
-
-const coverageItems = ["West Bengal", "North-East India", "Bihar", "Jharkhand"];
-
 export default function AboutPage() {
   return (
     <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
@@ -59,18 +34,15 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10">
             <div className="order-1 max-w-2xl lg:order-none">
               <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#6B7280] sm:text-sm">
-                About Conchem International
+                About {company.name}
               </p>
 
               <h1 className="mt-4 max-w-xl text-[clamp(2.25rem,4.4vw,4.1rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
-                Building Trust Since 2001
+                Building Trust Since {company.foundedYear}
               </h1>
 
               <div className="mt-5 space-y-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-                <p>
-                  Conchem International has grown by focusing on dependable manufacturing,
-                  practical product performance and the day-to-day needs of construction teams.
-                </p>
+                <p>{company.descriptionLong}</p>
                 <p>
                   We make waterproofing and construction chemical solutions designed for real site
                   conditions, with an emphasis on consistency, support and long-term value.
@@ -116,31 +88,21 @@ export default function AboutPage() {
               </h2>
 
               <div className="mt-4 space-y-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-                <p>
-                  Conchem International began in 2001 with a simple focus: create dependable
-                  waterproofing and construction chemicals that respond to real conditions on site.
-                </p>
-                <p>
-                  Over time, that focus helped us expand from a local manufacturing base to a
-                  regional partner for builders, contractors and distributors who need consistent
-                  product performance.
-                </p>
-                <p>
-                  Today, we continue to build on that foundation with careful production, practical
-                  support and a long-term view of customer relationships.
-                </p>
+                {company.story.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </div>
 
             <div className="rounded-[2rem] border border-[#E5E7EB] bg-white p-6 sm:p-8">
               <div className="space-y-4">
-                {timeline.map((item, index) => (
+                {company.timeline.map((item, index) => (
                   <div key={item.label} className="flex gap-4">
                     <div className="flex flex-col items-center">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#C8102E]">
+                      <div className="flex min-h-11 min-w-[2.75rem] items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] px-2 py-2 text-center text-xs font-semibold uppercase text-[#C8102E]">
                         {item.label}
                       </div>
-                      {index !== timeline.length - 1 ? (
+                      {index !== company.timeline.length - 1 ? (
                         <div className="mt-2 h-10 w-px bg-[#E5E7EB]" aria-hidden="true" />
                       ) : null}
                     </div>
@@ -169,7 +131,7 @@ export default function AboutPage() {
                 Mission
               </h3>
               <ul className="mt-3 space-y-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                {missionPoints.map((point) => (
+                {company.mission.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#C8102E]" aria-hidden="true" />
                     <span>{point}</span>
@@ -186,7 +148,7 @@ export default function AboutPage() {
                 Vision
               </h3>
               <ul className="mt-3 space-y-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                {visionPoints.map((point) => (
+                {company.vision.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#C8102E]" aria-hidden="true" />
                     <span>{point}</span>
@@ -252,7 +214,7 @@ export default function AboutPage() {
               </h2>
 
               <ul className="mt-6 space-y-4 text-sm text-[#374151] sm:text-[15px]">
-                {trustPoints.map((point) => (
+                {company.trustReasons.map((point) => (
                   <li key={point} className="flex items-start gap-3">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#C8102E]" aria-hidden="true" />
                     <span>{point}</span>
@@ -287,7 +249,7 @@ export default function AboutPage() {
               </p>
 
               <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {coverageItems.map((item) => (
+                {company.regionsServed.map((item) => (
                   <li
                     key={item}
                     className="rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-medium text-[#374151]"
@@ -305,12 +267,11 @@ export default function AboutPage() {
         <Container>
           <div className="mx-auto max-w-[780px] rounded-[2rem] border border-[#E5E7EB] bg-white px-6 py-12 text-center shadow-[0_1px_2px_rgba(17,24,39,0.03)] sm:px-10 sm:py-14 lg:px-14 lg:py-16">
             <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Ready to Build Stronger, Longer-Lasting Structures?
+              {company.cta.default.title}
             </h2>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-              Whether you&apos;re a contractor, builder, distributor, or homeowner, our team is ready
-              to help you choose the right waterproofing solution.
+              {company.cta.default.description}
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

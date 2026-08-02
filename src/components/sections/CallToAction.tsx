@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import Container from "../ui/Container";
+import { company } from "@/data/company";
+
 
 type CallToActionProps = {
   title?: string;
@@ -12,12 +14,12 @@ type CallToActionProps = {
 };
 
 export default function CallToAction({
-  title = "Ready to Build Stronger, Longer-Lasting Structures?",
-  description = "Whether you&apos;re a contractor, builder, distributor, or homeowner, our team is ready to help you choose the right waterproofing solution.",
-  primaryLabel = "Contact Us",
-  primaryHref = "/contact",
-  secondaryLabel = "Browse Products",
-  secondaryHref = "/products",
+  title = company.cta.default.title,
+  description = company.cta.default.description,
+  primaryLabel = company.cta.default.primaryLabel,
+  primaryHref = company.cta.default.primaryHref,
+  secondaryLabel = company.cta.default.secondaryLabel,
+  secondaryHref = company.cta.default.secondaryHref,
 }: CallToActionProps) {
   return (
     <section className="py-8 sm:py-10 lg:py-14">

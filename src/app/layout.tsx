@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
+import { company } from "@/data/company";
+
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -13,9 +15,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Conchem International",
-  description: "Conchem International website scaffold.",
+  title: company.name,
+  description: company.description,
 };
+
 
 export default function RootLayout({
   children,

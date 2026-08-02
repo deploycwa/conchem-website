@@ -8,8 +8,9 @@ import {
 } from "lucide-react";
 
 import Container from "../ui/Container";
+import { company } from "@/data/company";
 
-const stats = ["Since 2001", "9+ Products", "Factory Based", "Eastern India"];
+
 
 const features = [
   {
@@ -61,14 +62,14 @@ export default function WhyConchem() {
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {stats.map((stat) => (
+              {company.stats.map((stat) => (
                 <div
-                  key={stat}
+                  key={stat.label}
                   className="rounded-2xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-medium text-[#374151] shadow-[0_1px_2px_rgba(17,24,39,0.02)]"
                 >
                   <span className="inline-flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#C8102E]" aria-hidden="true" />
-                    {stat}
+                    {stat.label}
                   </span>
                 </div>
               ))}

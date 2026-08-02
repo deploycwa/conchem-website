@@ -2,12 +2,9 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 import Container from "../ui/Container";
+import { company } from "@/data/company";
 
-const trustPoints = [
-  "Manufacturing Since 2001",
-  "Factory in Siliguri, West Bengal",
-  "Serving Eastern & North-Eastern India",
-];
+
 
 export default function Hero() {
   return (
@@ -16,7 +13,7 @@ export default function Hero() {
         <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-center lg:gap-10">
           <div className="order-1 max-w-2xl lg:order-none">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#6B7280] sm:text-sm">
-              Trusted Waterproofing Solutions Since 2001
+              {company.tagline}
             </p>
 
             <h1 className="mt-4 max-w-xl text-[clamp(2.25rem,4.4vw,4.1rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
@@ -45,7 +42,7 @@ export default function Hero() {
             </div>
 
             <ul className="mt-8 space-y-3 text-sm text-[#374151] sm:text-[15px]">
-              {trustPoints.map((point) => (
+              {company.trustPoints.map((point) => (
                 <li key={point} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#C8102E]" aria-hidden="true" />
                   <span>{point}</span>
