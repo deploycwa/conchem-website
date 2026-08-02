@@ -34,6 +34,8 @@ export const images = {
     directory: "/images/industries/",
   },
   factory: {
+    primary: "",
+    alt: "Conchem Manufacturing Facility & Factory",
     directory: "/images/factory/",
   },
   icons: {

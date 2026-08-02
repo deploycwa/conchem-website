@@ -1,6 +1,7 @@
 import { Boxes, Factory, ShieldCheck, Truck, Warehouse } from "lucide-react";
 
 import Container from "../ui/Container";
+import FactoryImage from "../ui/FactoryImage";
 
 const features = [
   {
@@ -46,13 +47,7 @@ export default function ManufacturingExcellence() {
       <Container>
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10">
           <div className="order-1 lg:order-none">
-            <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#FAFAFA] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.03)] sm:min-h-[420px] lg:min-h-[560px]">
-              <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#D1D5DB] bg-white px-6 py-16 text-center">
-                <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                  FACTORY IMAGE
-                </span>
-              </div>
-            </div>
+            <FactoryImage />
           </div>
 
           <div className="order-2 lg:order-none">

@@ -14,6 +14,7 @@ import {
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
+import FactoryImage from "../../components/ui/FactoryImage";
 import { company } from "@/data/company";
 
 const coreValues = [
@@ -67,13 +68,7 @@ export default function AboutPage() {
             </div>
 
             <div className="order-2 lg:order-none">
-              <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    FACTORY IMAGE
-                  </span>
-                </div>
-              </div>
+              <FactoryImage priority />
             </div>
           </div>
         </Container>
@@ -199,13 +194,7 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-10">
             <div className="order-1 lg:order-none">
-              <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    FACTORY IMAGE
-                  </span>
-                </div>
-              </div>
+              <FactoryImage variant="compact" />
             </div>
 
             <div className="order-2 lg:order-none">
