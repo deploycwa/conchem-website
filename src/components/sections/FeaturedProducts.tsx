@@ -48,7 +48,7 @@ export default function FeaturedProducts() {
                     </h3>
 
                     <p className="mt-4 max-w-xl text-base leading-7 text-[#4B5563]">
-                      {product.description}
+                      {product.fullDescription}
                     </p>
 
                     <ul className="mt-6 space-y-3 text-sm text-[#374151] sm:text-[15px]">

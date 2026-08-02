@@ -12,17 +12,16 @@ export default function Hero() {
         <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-center lg:gap-10">
           <div className="order-1 max-w-2xl lg:order-none">
             <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#6B7280] sm:text-sm">
-              {company.tagline}
+              {company.name}
             </p>
 
             <h1 className="mt-4 max-w-xl text-[clamp(2.25rem,4.4vw,4.1rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
-              Protect Every Structure with Confidence.
+              Making Your Dream Home Healthy &amp; Strong.
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-              Conchem International manufactures high-performance waterproofing and construction
-              chemicals trusted by builders, contractors and homeowners across{" "}
-              <span className="font-medium text-[#C8102E]">Eastern and North-Eastern India.</span>
+              Premium construction chemicals engineered for waterproofing, repair, bonding, and
+              long-lasting structural protection.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">

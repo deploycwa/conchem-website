@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import {
   ArrowRight,
+  CheckCircle2,
   ChevronRight,
   Download,
   Droplets,
@@ -54,8 +55,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   }
 
   return {
-    title: product.name,
-    description: product.description,
+    title: product.seoTitle,
+    description: product.seoDescription,
     keywords: [
       product.name,
       product.category,
@@ -67,8 +68,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
       canonical: `/products/${product.slug}`,
     },
     openGraph: {
-      title: `${product.name} | ${company.name}`,
-      description: product.description,
+      title: product.seoTitle,
+      description: product.seoDescription,
       url: `/products/${product.slug}`,
       siteName: company.name,
       locale: "en_IN",
@@ -76,8 +77,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
     },
     twitter: {
       card: "summary_large_image",
-      title: `${product.name} | ${company.name}`,
-      description: product.description,
+      title: product.seoTitle,
+      description: product.seoDescription,
     },
   };
 }
@@ -128,6 +129,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   const relatedProducts = getRelatedProducts(product);
   const categoryIcon = getCategoryIcon(product.category);
+
+  // Graceful fallbacks for optional/array fields
+  const features = product.features ?? [];
+  const benefits = product.benefits ?? [];
+  const techSpecs = product.technicalSpecifications ?? {};
+  const techSpecEntries = Object.entries(techSpecs);
 
   return (
     <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
@@ -186,8 +193,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               </h1>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-                {product.description}
+                {product.fullDescription}
               </p>
+
+              {features.length > 0 && (
+                <ul className="mt-6 space-y-2">
+                  {features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-3 text-sm text-[#374151] sm:text-[15px]">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#C8102E]" aria-hidden="true" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <div className="mt-6 flex flex-wrap gap-2">
                 {product.packageSizes.map((size) => (
@@ -228,27 +246,62 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </p>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {product.applications.map((application) => {
-              const Icon = getApplicationIcon(application);
+          {product.applications.length > 0 ? (
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {product.applications.map((application) => {
+                const Icon = getApplicationIcon(application);
 
-              return (
-                <article
-                  key={application}
-                  className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em] text-[#111827]">
-                    {application}
-                  </h3>
-                </article>
-              );
-            })}
-          </div>
+                return (
+                  <article
+                    key={application}
+                    className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
+                  >
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em] text-[#111827]">
+                      {application}
+                    </h3>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="mt-8 text-sm text-[#6B7280]">No application areas listed for this product.</p>
+          )}
         </Container>
       </section>
+
+      {benefits.length > 0 && (
+        <section className="py-8 sm:py-10 lg:py-14">
+          <Container>
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
+                Benefits
+              </h2>
+              <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
+                Key advantages of using {product.name} on your project.
+              </p>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {benefits.map((benefit) => (
+                <article
+                  key={benefit}
+                  className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                      <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <p className="mt-1 text-sm leading-6 text-[#374151] sm:text-[15px]">{benefit}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
@@ -261,33 +314,37 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </p>
           </div>
 
-          <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white">
-            <table className="w-full border-collapse text-left">
-              <thead className="bg-[#FAFAFA]">
-                <tr>
-                  <th className="border-b border-[#E5E7EB] px-5 py-4 text-sm font-semibold text-[#111827] sm:px-6">
-                    Property
-                  </th>
-                  <th className="border-b border-[#E5E7EB] px-5 py-4 text-sm font-semibold text-[#111827] sm:px-6">
-                    Value
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {product.specifications.map((spec, index) => (
-                  <tr
-                    key={spec.property}
-                    className={index !== product.specifications.length - 1 ? "border-b border-[#E5E7EB]" : ""}
-                  >
-                    <td className="px-5 py-4 text-sm font-medium text-[#374151] sm:px-6">
-                      {spec.property}
-                    </td>
-                    <td className="px-5 py-4 text-sm text-[#4B5563] sm:px-6">{spec.value}</td>
+          {techSpecEntries.length > 0 ? (
+            <div className="mt-8 overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white">
+              <table className="w-full border-collapse text-left">
+                <thead className="bg-[#FAFAFA]">
+                  <tr>
+                    <th className="border-b border-[#E5E7EB] px-5 py-4 text-sm font-semibold text-[#111827] sm:px-6">
+                      Property
+                    </th>
+                    <th className="border-b border-[#E5E7EB] px-5 py-4 text-sm font-semibold text-[#111827] sm:px-6">
+                      Value
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {techSpecEntries.map(([property, value], index) => (
+                    <tr
+                      key={property}
+                      className={index !== techSpecEntries.length - 1 ? "border-b border-[#E5E7EB]" : ""}
+                    >
+                      <td className="px-5 py-4 text-sm font-medium text-[#374151] sm:px-6">
+                        {property}
+                      </td>
+                      <td className="px-5 py-4 text-sm text-[#4B5563] sm:px-6">{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="mt-8 text-sm text-[#6B7280]">Technical specifications not yet available for this product.</p>
+          )}
         </Container>
       </section>
 
@@ -299,26 +356,30 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </h2>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {product.downloads.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                  <Download className="h-5 w-5" aria-hidden="true" />
-                </div>
+          {product.downloads.length > 0 ? (
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {product.downloads.map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                    <Download className="h-5 w-5" aria-hidden="true" />
+                  </div>
 
-                <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                  {item.title}
-                </h3>
+                  <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
+                    {item.title}
+                  </h3>
 
-                <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
+                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-8 text-sm text-[#6B7280]">No downloads are currently available for this product.</p>
+          )}
         </Container>
       </section>
 
