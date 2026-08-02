@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
 
+import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 import { company } from "@/data/company";
 import { images } from "@/data/images";
 
@@ -89,6 +90,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <AnalyticsProvider />
       </body>
     </html>
   );
