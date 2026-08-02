@@ -79,7 +79,7 @@ export default function AboutPage() {
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
                 >
                   Contact Us
@@ -315,7 +315,7 @@ export default function AboutPage() {
 
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
-                href="#contact"
+                href="/contact"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
               >
                 Contact Us

@@ -107,7 +107,7 @@ export default function SolutionsPage() {
                 </Button>
 
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
                 >
                   <span>Contact Us</span>

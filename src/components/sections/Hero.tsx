@@ -37,7 +37,7 @@ export default function Hero() {
                 Explore Products
               </Link>
               <Link
-                href="#contact"
+                href="/contact"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-[#D1D5DB] bg-white px-6 text-sm font-semibold text-[#111827] transition-colors hover:border-[#9CA3AF] hover:bg-[#F9FAFB]"
               >
                 Contact Us

@@ -157,13 +157,13 @@ export default function ProductsPage() {
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <Link
-                  href="#categories"
+                  href="/products"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
                 >
                   Browse Categories
                 </Link>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
                 >
                   <span>Contact Us</span>

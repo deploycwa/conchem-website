@@ -11,9 +11,9 @@ const productLinks = [
 
 const companyLinks = [
   { label: "About Conchem", href: "/about" },
-  { label: "Manufacturing Excellence", href: "#manufacturing" },
+  { label: "Manufacturing Excellence", href: "/about" },
   { label: "Industries We Serve", href: "/industries" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const contactItems = [
@@ -95,10 +95,10 @@ export default function Footer() {
           <p>© 2026 Conchem International. All rights reserved.</p>
 
           <div className="flex flex-wrap items-center gap-4">
-            <Link href="#privacy" className="transition-colors hover:text-[#C8102E]">
+            <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
               Privacy Policy
             </Link>
-            <Link href="#terms" className="transition-colors hover:text-[#C8102E]">
+            <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
               Terms
             </Link>
           </div>
