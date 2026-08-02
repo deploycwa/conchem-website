@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -7,14 +8,24 @@ import {
   FlaskConical,
   Layers3,
   Paintbrush,
+  Rows3,
   ShieldCheck,
+  Slash,
   Wrench,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { notFound } from "next/navigation";
 
 import Footer from "../../../components/layout/Footer";
 import Navbar from "../../../components/layout/Navbar";
 import Container from "../../../components/ui/Container";
 import { Button } from "@/components/ui/button";
+import {
+  getProductBySlug,
+  getRelatedProducts,
+  type ApplicationArea,
+  type ProductCategory,
+} from "@/data/products";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -22,138 +33,52 @@ type ProductDetailPageProps = {
   }>;
 };
 
-type ProductDetail = {
-  name: string;
-  category: string;
-  description: string;
-  sizes: string[];
-  relatedCategory: string;
+// -----------------------------------------------------------------------------
+// Icon maps (UI concern — kept in the page layer)
+// -----------------------------------------------------------------------------
+
+const categoryIconMap: Record<ProductCategory, LucideIcon> = {
+  Waterproofing: Droplets,
+  Admixtures: FlaskConical,
+  "Repair Mortars": Layers3,
+  "Tile Adhesives": ShieldCheck,
+  Grouts: Rows3,
+  Primers: Slash,
 };
 
-const productCatalog: Record<string, ProductDetail> = {
-  "latex-m-p": {
-    name: "Latex M.P.",
-    category: "Waterproofing",
-    description:
-      "A dependable waterproofing additive for mortar and repair applications that need stronger bonding and improved flexibility.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Waterproofing",
-  },
-  "plastomix": {
-    name: "Plastomix",
-    category: "Admixtures",
-    description:
-      "A site-ready admixture designed to support workability, consistency and durable concrete performance.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Admixtures",
-  },
-  "rust-stop": {
-    name: "Rust Stop",
-    category: "Repair Mortars",
-    description:
-      "A protective solution for reinforcement steel and restoration work where corrosion resistance matters.",
-    sizes: ["1L", "5L"],
-    relatedCategory: "Repair Mortars",
-  },
-  "bond-plus": {
-    name: "Bond Plus",
-    category: "Primers",
-    description:
-      "A reliable bonding aid that helps prepare surfaces and improve adhesion for construction applications.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Primers",
-  },
-  "tile-fix": {
-    name: "Tile Fix",
-    category: "Tile Adhesives",
-    description:
-      "A practical tile fixing product for secure installation and dependable performance across site conditions.",
-    sizes: ["1L", "5L"],
-    relatedCategory: "Tile Adhesives",
-  },
-  "prime-coat": {
-    name: "Prime Coat",
-    category: "Primers",
-    description:
-      "A surface preparation primer designed to support clean application and consistent finishing results.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Primers",
-  },
-  "crack-seal": {
-    name: "Crack Seal",
-    category: "Repair Mortars",
-    description:
-      "A repair-focused solution for addressing cracks and helping restore surface integrity in demanding areas.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Repair Mortars",
-  },
-  "flex-bond": {
-    name: "Flex Bond",
-    category: "Waterproofing",
-    description:
-      "A flexible bonding solution intended for repair work that needs better adhesion and movement tolerance.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Waterproofing",
-  },
-  "damp-shield": {
-    name: "Damp Shield",
-    category: "Waterproofing",
-    description:
-      "A protective waterproofing product developed to help reduce damp-related issues in interior spaces.",
-    sizes: ["1L", "5L", "20L"],
-    relatedCategory: "Waterproofing",
-  },
+const applicationIconMap: Record<ApplicationArea, LucideIcon> = {
+  Waterproofing: Droplets,
+  Repair: Wrench,
+  Bonding: Layers3,
+  Plaster: FlaskConical,
+  Concrete: ShieldCheck,
+  "Surface Preparation": Paintbrush,
+  "Corrosion Protection": ShieldCheck,
+  "Tile Fixing": Layers3,
 };
 
-const applicationItems = [
-  { label: "Waterproofing", icon: Droplets },
-  { label: "Repair", icon: Wrench },
-  { label: "Bonding", icon: Layers3 },
-  { label: "Plaster", icon: FlaskConical },
-  { label: "Concrete", icon: ShieldCheck },
-];
-
-const specifications = [
-  { property: "Appearance", value: "Placeholder value" },
-  { property: "Coverage", value: "Placeholder value" },
-  { property: "Shelf Life", value: "Placeholder value" },
-  { property: "Packaging", value: "Placeholder value" },
-  { property: "Application", value: "Placeholder value" },
-];
-
-const downloadItems = [
-  { title: "Technical Datasheet", description: "Product details and technical overview.", icon: Download },
-  { title: "Safety Datasheet", description: "Safety and handling guidance for the product.", icon: Download },
-];
-
-const relatedProducts = [
-  {
-    name: "Plastomix",
-    category: "Admixtures",
-    description: "A reliable admixture option for stronger, more consistent site performance.",
-    icon: FlaskConical,
-  },
-  {
-    name: "Rust Stop",
-    category: "Repair Mortars",
-    description: "A practical solution for corrosion protection and restoration work.",
-    icon: ShieldCheck,
-  },
-  {
-    name: "Prime Coat",
-    category: "Primers",
-    description: "A surface preparation option designed to support clean, even application.",
-    icon: Paintbrush,
-  },
-];
-
-function slugToKey(slug: string) {
-  return slug.toLowerCase();
+function getCategoryIcon(category: ProductCategory): LucideIcon {
+  return categoryIconMap[category] ?? Wrench;
 }
 
+function getApplicationIcon(application: ApplicationArea): LucideIcon {
+  return applicationIconMap[application] ?? Wrench;
+}
+
+// -----------------------------------------------------------------------------
+// Page
+// -----------------------------------------------------------------------------
+
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const resolvedParams = await params;
-  const product = productCatalog[slugToKey(resolvedParams.slug)] ?? productCatalog["latex-m-p"];
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  const relatedProducts = getRelatedProducts(product);
+  const categoryIcon = getCategoryIcon(product.category);
 
   return (
     <main className="flex min-h-screen flex-col gap-4 px-4 py-4">
@@ -182,7 +107,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <div className="flex min-h-[360px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 sm:min-h-[460px] lg:min-h-[620px]">
                 <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
                   <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    PRODUCT IMAGE
+                    {product.imagePlaceholder}
                   </span>
                 </div>
               </div>
@@ -202,7 +127,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </div>
 
             <div className="order-2 max-w-2xl lg:order-none">
-              <div className="inline-flex items-center rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
+                {React.createElement(categoryIcon, { className: "h-3.5 w-3.5", "aria-hidden": "true" })}
                 {product.category}
               </div>
 
@@ -215,7 +141,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
-                {product.sizes.map((size) => (
+                {product.packageSizes.map((size) => (
                   <span
                     key={size}
                     className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-medium text-[#374151]"
@@ -254,19 +180,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {applicationItems.map((item) => {
-              const Icon = item.icon;
+            {product.applications.map((application) => {
+              const Icon = getApplicationIcon(application);
 
               return (
                 <article
-                  key={item.label}
+                  key={application}
                   className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold tracking-[-0.02em] text-[#111827]">
-                    {item.label}
+                    {application}
                   </h3>
                 </article>
               );
@@ -282,7 +208,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               Specifications
             </h2>
             <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-              Placeholder specification values for the product detail layout.
+              Technical specification values for {product.name}.
             </p>
           </div>
 
@@ -299,8 +225,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 </tr>
               </thead>
               <tbody>
-                {specifications.map((spec, index) => (
-                  <tr key={spec.property} className={index !== specifications.length - 1 ? "border-b border-[#E5E7EB]" : ""}>
+                {product.specifications.map((spec, index) => (
+                  <tr
+                    key={spec.property}
+                    className={index !== product.specifications.length - 1 ? "border-b border-[#E5E7EB]" : ""}
+                  >
                     <td className="px-5 py-4 text-sm font-medium text-[#374151] sm:px-6">
                       {spec.property}
                     </td>
@@ -322,83 +251,81 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {downloadItems.map((item) => {
-              const Icon = item.icon;
+            {product.downloads.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                  <Download className="h-5 w-5" aria-hidden="true" />
+                </div>
 
-              return (
-                <article
-                  key={item.title}
-                  className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
+                <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
+                  {item.title}
+                </h3>
 
-                  <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {item.description}
-                  </p>
-                </article>
-              );
-            })}
+                <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
+                  {item.description}
+                </p>
+              </article>
+            ))}
           </div>
         </Container>
       </section>
 
-      <section className="py-8 sm:py-10 lg:py-14">
-        <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Related Products
-            </h2>
-          </div>
+      {relatedProducts.length > 0 && (
+        <section className="py-8 sm:py-10 lg:py-14">
+          <Container>
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
+                Related Products
+              </h2>
+            </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {relatedProducts.map((productItem) => {
-              const Icon = productItem.icon;
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {relatedProducts.map((relatedProduct) => {
+                const Icon = getCategoryIcon(relatedProduct.category);
 
-              return (
-                <article
-                  key={productItem.name}
-                  className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4">
-                    <div className="flex h-full w-full items-center justify-center rounded-[1rem] border border-dashed border-[#D1D5DB] bg-white text-center">
-                      <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280]">
-                        PRODUCT IMAGE
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
-                    <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                    {productItem.category}
-                  </div>
-
-                  <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {productItem.name}
-                  </h3>
-
-                  <p className="mt-3 min-h-[3.5rem] text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {productItem.description}
-                  </p>
-
-                  <Link
-                    href="/products"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]"
+                return (
+                  <article
+                    key={relatedProduct.slug}
+                    className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                   >
-                    <span>View Details</span>
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+                    <div className="aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4">
+                      <div className="flex h-full w-full items-center justify-center rounded-[1rem] border border-dashed border-[#D1D5DB] bg-white text-center">
+                        <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280]">
+                          {relatedProduct.imagePlaceholder}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
+                      <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                      {relatedProduct.category}
+                    </div>
+
+                    <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
+                      {relatedProduct.name}
+                    </h3>
+
+                    <p className="mt-3 min-h-[3.5rem] text-sm leading-6 text-[#4B5563] sm:text-[15px]">
+                      {relatedProduct.shortDescription}
+                    </p>
+
+                    <Link
+                      href={`/products/${relatedProduct.slug}`}
+                      className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]"
+                    >
+                      <span>View Details</span>
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </article>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
+      )}
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
