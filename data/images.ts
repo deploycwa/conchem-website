@@ -31,7 +31,17 @@ export const images = {
     } as Record<string, { src?: string; alt?: string }>,
   },
   industries: {
+    primary: "",
+    alt: "Conchem Construction Chemicals Across Industries",
     directory: "/images/industries/",
+    byCategory: {
+      residential: { src: "", alt: "Residential Construction Solutions" },
+      commercial: { src: "", alt: "Commercial Building Waterproofing" },
+      industrial: { src: "", alt: "Industrial Plant & Warehouse Systems" },
+      infrastructure: { src: "", alt: "Infrastructure & Public Works Protection" },
+      hospitality: { src: "", alt: "Hospitality & Resort Solutions" },
+      institutional: { src: "", alt: "Institutional & Campus Building Systems" },
+    } as Record<string, { src?: string; alt?: string }>,
   },
   factory: {
     primary: "",
