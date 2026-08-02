@@ -6,6 +6,7 @@ import FeaturedProducts from "../components/sections/FeaturedProducts";
 import ManufacturingExcellence from "../components/sections/ManufacturingExcellence";
 import Industries from "../components/sections/Industries";
 import WhyConchem from "../components/sections/WhyConchem";
+import CallToAction from "../components/sections/CallToAction";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ManufacturingExcellence />
       <Industries />
       <WhyConchem />
+      <CallToAction />
       <Footer />
     </main>
   );
