@@ -104,7 +104,7 @@ export default function FeaturedProducts() {
                     </div>
 
                     <Link
-                      href="#products"
+                      href="/products"
                       className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
                     >
                       <span>Explore Product</span>
@@ -119,7 +119,7 @@ export default function FeaturedProducts() {
 
         <div className="mt-8 flex justify-center">
           <Link
-            href="#products"
+            href="/products"
             className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-7 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
           >
             View All Products

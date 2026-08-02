@@ -25,7 +25,7 @@ export default function CallToAction() {
             </Link>
 
             <Link
-              href="#products"
+              href="/products"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
             >
               <span>Browse Products</span>

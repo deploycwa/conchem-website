@@ -3,10 +3,10 @@ import Link from "next/link";
 import Container from "../ui/Container";
 
 const productLinks = [
-  { label: "Latex M.P.", href: "#products" },
-  { label: "Plastomix", href: "#products" },
-  { label: "Rust Stop", href: "#products" },
-  { label: "All Products", href: "#products" },
+  { label: "Latex M.P.", href: "/products" },
+  { label: "Plastomix", href: "/products" },
+  { label: "Rust Stop", href: "/products" },
+  { label: "All Products", href: "/products" },
 ];
 
 const companyLinks = [

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "../ui/Container";
 
 const navigationItems = [
-  { label: "Products", href: "#products" },
+  { label: "Products", href: "/products" },
   { label: "Solutions", href: "#solutions" },
   { label: "Industries", href: "#industries" },
   { label: "About", href: "/about" },
