@@ -5,7 +5,6 @@
 
 export const images = {
   logo: {
-    primary: "/images/logo/final navbar logo.png",
     navbar: "/images/logo/final navbar logo.png",
     badge: "/images/logo/conchem-logo-badge.png",
     favicon: "/images/logo/conchem-favicon.png",
@@ -51,14 +50,7 @@ export const images = {
   icons: {
     directory: "/images/icons/",
   },
-  placeholders: {
-    logo: "/conchem-logo-placeholder.svg",
-    file: "/file.svg",
-    globe: "/globe.svg",
-    next: "/next.svg",
-    vercel: "/vercel.svg",
-    window: "/window.svg",
-  },
 } as const;
 
 export type ImagesData = typeof images;
+
