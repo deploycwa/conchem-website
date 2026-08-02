@@ -18,9 +18,9 @@ const logoConfigs: Record<
   Record<LogoSize, { width: number; height: number; defaultClass: string }>
 > = {
   navbar: {
-    sm: { width: 150, height: 40, defaultClass: "h-[40px] w-auto" },
-    md: { width: 180, height: 48, defaultClass: "h-[48px] w-auto" },
-    lg: { width: 225, height: 60, defaultClass: "h-[60px] w-auto" },
+    sm: { width: 155, height: 40, defaultClass: "h-[40px] w-auto" },
+    md: { width: 195, height: 50, defaultClass: "h-[50px] w-auto" },
+    lg: { width: 235, height: 60, defaultClass: "h-[60px] w-auto" },
   },
   badge: {
     sm: { width: 180, height: 50, defaultClass: "h-[50px] w-auto" },

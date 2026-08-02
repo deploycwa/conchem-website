@@ -53,7 +53,7 @@ export const company = {
     primaryHref: "mailto:hello@conchem.com",
   },
 
-  website: "https://conchem.com",
+  website: "https://conchem.vercel.app",
 
   businessHours: "Mon - Sat, 9:30 AM to 6:00 PM",
 

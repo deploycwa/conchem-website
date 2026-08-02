@@ -5,8 +5,8 @@
 
 export const images = {
   logo: {
-    primary: "/images/logo/conchem-logo-navbar.png",
-    navbar: "/images/logo/conchem-logo-navbar.png",
+    primary: "/images/logo/final navbar logo.png",
+    navbar: "/images/logo/final navbar logo.png",
     badge: "/images/logo/conchem-logo-badge.png",
     favicon: "/images/logo/conchem-favicon.png",
     alt: "Conchem International",
