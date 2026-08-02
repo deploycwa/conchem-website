@@ -5,8 +5,8 @@ import Container from "../ui/Container";
 
 const navigationItems = [
   { label: "Products", href: "/products" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Industries", href: "#industries" },
+  { label: "Solutions", href: "/solution" },
+  { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "#contact" },
 ];
