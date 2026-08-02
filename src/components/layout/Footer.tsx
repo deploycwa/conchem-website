@@ -10,7 +10,7 @@ const productLinks = [
 ];
 
 const companyLinks = [
-  { label: "About Conchem", href: "#about" },
+  { label: "About Conchem", href: "/about" },
   { label: "Manufacturing Excellence", href: "#manufacturing" },
   { label: "Industries We Serve", href: "#industries" },
   { label: "Contact", href: "#contact" },

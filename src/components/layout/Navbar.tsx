@@ -7,7 +7,7 @@ const navigationItems = [
   { label: "Products", href: "#products" },
   { label: "Solutions", href: "#solutions" },
   { label: "Industries", href: "#industries" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "#contact" },
 ];
 
