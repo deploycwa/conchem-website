@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 import Container from "../ui/Container";
+import ProductImage from "../ui/ProductImage";
 import { getFeaturedProducts } from "@/data/products";
 
 const featuredProducts = getFeaturedProducts();
@@ -30,13 +31,11 @@ export default function FeaturedProducts() {
               <article key={product.slug} className="p-6 sm:p-8 lg:p-10">
                 <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-10">
                   <div className={imageOrder}>
-                    <div className="flex min-h-[260px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#FBFBFB] px-6 py-10 sm:min-h-[320px] lg:min-h-[360px]">
-                      <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#D1D5DB] bg-white px-6 py-14 text-center">
-                        <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                          {product.imagePlaceholder}
-                        </span>
-                      </div>
-                    </div>
+                    <ProductImage
+                      slug={product.slug}
+                      placeholderText={product.imagePlaceholder}
+                      variant="featured"
+                    />
                   </div>
 
                   <div className={contentOrder}>

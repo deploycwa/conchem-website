@@ -19,6 +19,7 @@ import { notFound } from "next/navigation";
 import Footer from "../../../components/layout/Footer";
 import Navbar from "../../../components/layout/Navbar";
 import Container from "../../../components/ui/Container";
+import ProductImage from "../../../components/ui/ProductImage";
 import { Button } from "@/components/ui/button";
 import {
   getProductBySlug,
@@ -104,13 +105,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         <Container>
           <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
             <div className="order-1 lg:order-none">
-              <div className="flex min-h-[360px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 sm:min-h-[460px] lg:min-h-[620px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    {product.imagePlaceholder}
-                  </span>
-                </div>
-              </div>
+              <ProductImage
+                slug={product.slug}
+                placeholderText={product.imagePlaceholder}
+                variant="detail"
+                priority
+              />
 
               <div className="mt-4 grid grid-cols-3 gap-3 sm:gap-4">
                 {[1, 2, 3].map((thumb) => (
@@ -291,13 +291,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                     key={relatedProduct.slug}
                     className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                   >
-                    <div className="aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4">
-                      <div className="flex h-full w-full items-center justify-center rounded-[1rem] border border-dashed border-[#D1D5DB] bg-white text-center">
-                        <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280]">
-                          {relatedProduct.imagePlaceholder}
-                        </span>
-                      </div>
-                    </div>
+                    <ProductImage
+                      slug={relatedProduct.slug}
+                      placeholderText={relatedProduct.imagePlaceholder}
+                      variant="card"
+                    />
 
                     <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
                       <Icon className="h-3.5 w-3.5" aria-hidden="true" />

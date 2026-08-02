@@ -18,6 +18,17 @@ export const images = {
   },
   products: {
     directory: "/images/products/",
+    bySlug: {
+      "latex-m-p": { src: "", alt: "Latex M.P. Waterproofing Additive" },
+      plastomix: { src: "", alt: "Plastomix Mortar Admixture" },
+      "rust-stop": { src: "", alt: "Rust Stop Reinforcement Protection" },
+      "bond-plus": { src: "", alt: "Bond Plus Bonding Primer" },
+      "tile-fix": { src: "", alt: "Tile Fix Adhesive" },
+      "prime-coat": { src: "", alt: "Prime Coat Surface Primer" },
+      "crack-seal": { src: "", alt: "Crack Seal Repair Mortar" },
+      "flex-bond": { src: "", alt: "Flex Bond Waterproofing Agent" },
+      "damp-shield": { src: "", alt: "Damp Shield Protection Coating" },
+    } as Record<string, { src?: string; alt?: string }>,
   },
   industries: {
     directory: "/images/industries/",

@@ -15,6 +15,7 @@ import type { LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
+import ProductImage from "../../components/ui/ProductImage";
 import { products, type ProductCategory } from "@/data/products";
 
 // -----------------------------------------------------------------------------
@@ -268,13 +269,11 @@ export default function ProductsPage() {
                   className="group block rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
                 >
                   <article>
-                  <div className="aspect-[4/3] w-full rounded-[1.25rem] border border-[#E5E7EB] bg-[#FAFAFA] p-4">
-                    <div className="flex h-full w-full items-center justify-center rounded-[1rem] border border-dashed border-[#D1D5DB] bg-white text-center">
-                      <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280]">
-                        {product.imagePlaceholder}
-                      </span>
-                    </div>
-                  </div>
+                  <ProductImage
+                    slug={product.slug}
+                    placeholderText={product.imagePlaceholder}
+                    variant="card"
+                  />
 
                   <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
                     <Icon className="h-3.5 w-3.5" aria-hidden="true" />
