@@ -6,13 +6,11 @@ import {
   Mail,
   MapPin,
   Phone,
-  User,
-  BriefcaseBusiness,
-  MessageSquare,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+import ContactForm from "@/components/forms/ContactForm";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import CallToAction from "../../components/sections/CallToAction";
@@ -182,111 +180,7 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-8 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
             <div className="order-1 lg:order-none">
-              <div className="rounded-[2rem] border border-[#E5E7EB] bg-white p-6 sm:p-8 lg:p-10">
-                <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-                  Send a Message
-                </h2>
-
-                <form className="mt-8 space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="name" className="text-sm font-semibold text-[#111827]">
-                        Name
-                      </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
-                        <User className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
-                        <input
-                          id="name"
-                          type="text"
-                          placeholder="Your name"
-                          className="h-full w-full bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF]"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="company" className="text-sm font-semibold text-[#111827]">
-                        Company
-                      </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
-                        <BriefcaseBusiness className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
-                        <input
-                          id="company"
-                          type="text"
-                          placeholder="Company name"
-                          className="h-full w-full bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="email" className="text-sm font-semibold text-[#111827]">
-                        Email
-                      </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
-                        <Mail className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
-                        <input
-                          id="email"
-                          type="email"
-                          placeholder="name@example.com"
-                          className="h-full w-full bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF]"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="text-sm font-semibold text-[#111827]">
-                        Phone
-                      </label>
-                      <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
-                        <Phone className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
-                        <input
-                          id="phone"
-                          type="tel"
-                          placeholder="Phone number"
-                          className="h-full w-full bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF]"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="product-interest" className="text-sm font-semibold text-[#111827]">
-                      Product Interest
-                    </label>
-                    <div className="mt-2 flex h-12 items-center gap-3 rounded-full border border-[#D1D5DB] bg-white px-4 transition-colors focus-within:border-[#C8102E] focus-within:ring-2 focus-within:ring-[#C8102E]/20">
-                      <MessageSquare className="h-4 w-4 text-[#6B7280]" aria-hidden="true" />
-                      <input
-                        id="product-interest"
-                        type="text"
-                        placeholder="What product are you interested in?"
-                        className="h-full w-full bg-transparent text-sm text-[#111827] outline-none placeholder:text-[#9CA3AF]"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="text-sm font-semibold text-[#111827]">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={6}
-                      placeholder="Tell us about your project"
-                      className="mt-2 w-full rounded-[1.5rem] border border-[#D1D5DB] bg-white px-4 py-3 text-sm text-[#111827] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[#C8102E] focus:ring-2 focus:ring-[#C8102E]/20"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="h-12 w-full rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937] focus-visible:ring-2 focus-visible:ring-[#C8102E]"
-                  >
-                    Submit
-                  </Button>
-                </form>
-              </div>
+              <ContactForm />
             </div>
 
             <div className="order-2 lg:order-none">
