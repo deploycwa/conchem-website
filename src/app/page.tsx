@@ -4,6 +4,7 @@ import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import Hero from "../components/sections/Hero";
 import Problems from "../components/sections/Problems";
+import StatsBanner from "../components/sections/StatsBanner";
 import FeaturedProducts from "../components/sections/FeaturedProducts";
 import ManufacturingExcellence from "../components/sections/ManufacturingExcellence";
 import Industries from "../components/sections/Industries";
@@ -48,6 +49,7 @@ export default function Home() {
       <main id="main-content" tabIndex={-1} className="flex flex-col gap-4 outline-none">
         <Hero />
         <Problems />
+        <StatsBanner />
         <FeaturedProducts />
         <ManufacturingExcellence />
         <Industries />

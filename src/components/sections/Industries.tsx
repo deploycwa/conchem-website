@@ -8,7 +8,9 @@ import {
   Building2,
   Factory,
   Landmark,
+  School,
   ShieldCheck,
+  Users,
 } from "lucide-react";
 
 import Container from "../ui/Container";
@@ -18,31 +20,45 @@ import { cardVariants, previewVariants, durations, prefersReduceMotion } from ".
 const industries = [
   {
     title: "Residential",
-    description: "Reliable protection for homes, apartments and housing developments.",
+    description: "Reliable waterproofing and protection systems for homes and housing communities.",
     icon: HomeIcon,
     image: "/images/applications/resedential.png",
     alt: "Residential building exterior",
   },
   {
     title: "Commercial",
-    description: "Trusted solutions for offices, retail spaces and mixed-use properties.",
+    description: "Solutions designed for offices, retail spaces and mixed-use developments.",
     icon: Building2,
     image: "/images/applications/commercial.png",
     alt: "Commercial building facade",
   },
   {
     title: "Industrial",
-    description: "Durable products for plants, warehouses and production facilities.",
+    description: "Durable systems for factories, plants and demanding production environments.",
     icon: Factory,
     image: "/images/applications/industrial.png",
     alt: "Industrial warehouse interior",
   },
   {
     title: "Infrastructure",
-    description: "Built for bridges, public works and large-scale structural projects.",
+    description: "Protection-focused solutions for public works and large structural projects.",
     icon: Landmark,
     image: "/images/applications/infrastructure.png",
     alt: "Infrastructure construction site",
+  },
+  {
+    title: "Hospitality",
+    description: "Practical systems for hotels, resorts and guest-facing spaces that need reliability.",
+    icon: Users,
+    image: "/images/applications/hospitality.png",
+    alt: "Hospitality resort and hotel space",
+  },
+  {
+    title: "Institutional",
+    description: "Trusted products for schools, hospitals, campuses and similar facilities.",
+    icon: School,
+    image: "/images/applications/institutional.png",
+    alt: "Institutional school and campus building",
   },
 ];
 
@@ -50,7 +66,7 @@ function HomeIcon(props: React.ComponentProps<typeof ShieldCheck>) {
   return <ShieldCheck {...props} />;
 }
 
-export default function Industries() {
+export default function Industries({ showLink = true }: { showLink?: boolean }) {
   const [supportsHover, setSupportsHover] = useState<boolean>(() => {
     if (typeof window !== "undefined" && window.matchMedia) {
       return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -118,48 +134,62 @@ export default function Industries() {
               </p>
             </div>
 
-            <Link
-              href="/industries"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-[#E5E7EB] bg-white px-6 text-sm font-semibold text-[#111827] shadow-sm transition-colors hover:bg-[#F8FAFC]"
-            >
-              Learn More
-            </Link>
+            {showLink ? (
+              <Link
+                href="/industries"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-[#E5E7EB] bg-white px-6 text-sm font-semibold text-[#111827] shadow-sm transition-colors hover:bg-[#F8FAFC]"
+              >
+                Learn More
+              </Link>
+            ) : null}
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {industries.map((industry, i) => {
               const Icon = industry.icon;
+
+              const largeTitleVariants = {
+                rest: { opacity: 0, y: 12 },
+                hover: { opacity: 1, y: 0 },
+              };
+
+              const foregroundVariants = {
+                rest: { opacity: 1 },
+                hover: { opacity: 0 },
+                tease: { opacity: 0.6 },
+              };
 
               return (
                 <motion.article
                   key={industry.title}
-                  className="group relative overflow-hidden rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6"
                   initial="rest"
                   whileHover={supportsHover ? "hover" : undefined}
                   animate={supportsHover ? (teaseIndex === i ? "tease" : "rest") : "hover"}
                   variants={cardVariants}
+                  className="group relative overflow-hidden rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200"
                 >
                   <motion.div
                     className="pointer-events-none absolute inset-0 z-0"
                     variants={previewVariants}
-                    transition={{ duration: durations.preview }}
+                    transition={{ duration: durations.preview, ease: "easeOut" }}
                   >
                     <Image
                       src={industry.image}
                       alt={industry.alt}
                       fill
-                      className="object-cover opacity-70"
+                      className="object-cover"
                       sizes="(max-width: 768px) 100vw, 45vw"
                       priority={false}
+                      loading="lazy"
                     />
                     <motion.div
-                      className="absolute inset-0"
+                      className="absolute inset-0 bg-black/50"
                       variants={{ rest: { opacity: 0 }, hover: { opacity: 0.52 }, tease: { opacity: 0.35 } }}
-                      transition={{ duration: durations.preview }}
+                      transition={{ duration: durations.preview, ease: "easeOut" }}
                     />
                   </motion.div>
 
-                  <div className="relative z-10">
+                  <motion.div className="relative z-10" variants={foregroundVariants} transition={{ duration: 0.2 }}>
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
@@ -171,7 +201,54 @@ export default function Industries() {
                     <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
                       {industry.description}
                     </p>
-                  </div>
+
+                    <Link
+                      href="/industries"
+                      className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
+                    >
+                      <span>Learn More</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </motion.div>
+
+                  <motion.div
+                    className="pointer-events-none absolute left-6 right-6 bottom-6 z-20 text-white text-left uppercase font-bold leading-tight"
+                    variants={largeTitleVariants}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    initial="rest"
+                    // On non-hover devices, animate when the card scrolls into view
+                    whileInView={!supportsHover ? "hover" : undefined}
+                    viewport={{ once: true, amount: 0.2 }}
+                  >
+                    {industry.title.toUpperCase().split(" ").map((part, idx) => {
+                      const fontSizeClass =
+                        part.length > 11
+                          ? "text-xl sm:text-2xl md:text-3xl"
+                          : part.length > 8
+                          ? "text-2xl sm:text-3xl md:text-4xl"
+                          : "text-3xl sm:text-4xl md:text-5xl";
+
+                      return (
+                        <motion.span
+                          key={idx}
+                          className={`block font-bold tracking-tight break-words ${fontSizeClass}`}
+                          variants={largeTitleVariants}
+                        >
+                          {part}
+                        </motion.span>
+                      );
+                    })}
+
+                    <motion.p
+                      className="mt-3 max-w-[90%] text-sm leading-6 text-white/90 normal-case font-normal uppercase:normal-case"
+                      initial={{ y: 10, opacity: 0 }}
+                      whileInView={!supportsHover ? { y: 0, opacity: 1 } : undefined}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
+                    >
+                      {industry.description}
+                    </motion.p>
+                  </motion.div>
                 </motion.article>
               );
             })}

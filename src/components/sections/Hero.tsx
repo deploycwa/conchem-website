@@ -8,7 +8,12 @@ import { company } from "@/data/company";
 
 export default function Hero() {
   return (
-    <section className="py-8 sm:py-10 lg:py-14">
+    <section className="relative py-8 sm:py-10 lg:py-14">
+      {/* Logo-inspired ambient red glow orb */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-20 right-0 -z-10 h-[360px] w-[360px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(200,16,46,0.12),transparent_70%)] blur-3xl sm:h-[500px] sm:w-[500px]"
+      />
       <Container>
         <MotionSection direction="bottom" className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-center lg:gap-10">
           <div className="order-1 max-w-2xl lg:order-none">
@@ -20,9 +25,9 @@ export default function Hero() {
               {company.tagline}
             </h1>
 
-            {/* Mobile-only: image between title and paragraph */}
-            <div className="mt-6 lg:hidden">
-              <HeroImage />
+            {/* Mobile-only: image between title and paragraph (centered) */}
+            <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+              <HeroImage className="w-full" />
             </div>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
@@ -53,6 +58,28 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 pt-6 border-t border-[#E5E7EB]/80">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6B7280]">
+                Quick Solution Finder
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {[
+                  { label: "💧 Waterproofing", href: "/products?category=Waterproofing#products-catalog" },
+                  { label: "🧱 Crack-Free Plaster", href: "/products?category=Admixtures#products-catalog" },
+                  { label: "⛓️ Steel Corrosion", href: "/products?category=Repair+Mortars#products-catalog" },
+                  { label: "🪨 Tile & Marble Fixing", href: "/products?category=Tile+Adhesives#products-catalog" },
+                ].map((pill) => (
+                  <Link
+                    key={pill.label}
+                    href={pill.href}
+                    className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-white/80 px-3.5 py-1.5 text-xs font-medium text-[#111827] shadow-xs backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C8102E]/40 hover:bg-[#FFF7F8] hover:text-[#C8102E] hover:shadow-sm"
+                  >
+                    {pill.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Desktop-only: image in right column */}

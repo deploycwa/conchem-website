@@ -44,8 +44,8 @@ export const company = {
   },
 
   phone: {
-    primary: "+91 00000 00000",
-    primaryHref: "tel:+910000000000",
+    primary: "+91 9641335076",
+    primaryHref: "tel:+919641335076",
   },
 
   email: {

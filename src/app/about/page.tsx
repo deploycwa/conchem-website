@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -72,6 +73,11 @@ export default function AboutPage() {
                 Building Trust Since {company.foundedYear}
               </h1>
 
+              {/* Mobile-only image: right after title and before paragraph (centered) */}
+              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+                <FactoryImage priority />
+              </div>
+
               <div className="mt-5 space-y-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 <p>{company.descriptionLong}</p>
                 <p>
@@ -97,7 +103,8 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="order-2 lg:order-none">
+            {/* Desktop-only image */}
+            <div className="hidden lg:block order-2 lg:order-none">
               <FactoryImage priority />
             </div>
           </div>
@@ -254,11 +261,15 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-10">
             <div className="order-1 lg:order-none">
-              <div className="flex min-h-[280px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-white px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.03)] sm:min-h-[360px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-[#FAFAFA] px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    INDIA MAP
-                  </span>
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] min-h-[280px] sm:min-h-[360px] w-full overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white p-3 shadow-[0_1px_2px_rgba(17,24,39,0.03)]">
+                <div className="relative h-full min-h-[256px] sm:min-h-[336px] w-full overflow-hidden rounded-[1.5rem] bg-[#FAFAFA]">
+                  <Image
+                    src="/images/factory/region.png"
+                    alt="Regional Coverage Map"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-contain object-center p-2"
+                  />
                 </div>
               </div>
             </div>

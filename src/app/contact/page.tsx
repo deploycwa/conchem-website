@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ChevronDown,
@@ -13,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import ContactForm from "@/components/forms/ContactForm";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
-import CallToAction from "../../components/sections/CallToAction";
+import FaqSection from "../../components/sections/FaqSection";
 import Container from "../../components/ui/Container";
 import { company } from "@/data/company";
 
@@ -75,14 +76,22 @@ const contactCards = [
   },
 ];
 
-const faqItems = [
-  "How can I get product recommendations for my project?",
-  "Do you support contractors and distributors?",
-  "Can I ask about waterproofing systems for existing structures?",
-  "What should I share when requesting guidance?",
-  "Do you help with product selection for specific applications?",
-  "How do I contact the team for follow-up questions?",
-];
+function ContactHeroBox({ className }: { className?: string }) {
+  return (
+    <div className={`relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto min-h-[240px] sm:min-h-[320px] lg:min-h-[560px] w-full overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-3 shadow-[0_1px_2px_rgba(17,24,39,0.04)] ${className || ""}`}>
+      <div className="relative h-full min-h-[216px] sm:min-h-[296px] lg:min-h-[536px] w-full overflow-hidden rounded-[1.5rem] bg-white">
+        <Image
+          src="/images/solutions/contact-us.png"
+          alt="Contact Conchem Team"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-center"
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   return (
@@ -103,6 +112,11 @@ export default function ContactPage() {
                 <br />
                 That Lasts
               </h1>
+
+              {/* Mobile-only image: right after title and before paragraph (centered) */}
+              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+                <ContactHeroBox className="w-full" />
+              </div>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 Invite homeowners, contractors, builders and distributors to contact Conchem for
@@ -127,14 +141,9 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="order-2 lg:order-none">
-              <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    CONTACT IMAGE
-                  </span>
-                </div>
-              </div>
+            {/* Desktop-only image */}
+            <div className="hidden lg:block order-2 lg:order-none">
+              <ContactHeroBox />
             </div>
           </div>
         </Container>
@@ -184,11 +193,19 @@ export default function ContactPage() {
             </div>
 
             <div className="order-2 lg:order-none">
-              <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[620px]">
-                <div className="flex h-full w-full items-center justify-center rounded-[1.5rem] border border-dashed border-[#CBD5E1] bg-white px-6 py-16 text-center">
-                  <span className="text-sm font-semibold uppercase tracking-[0.35em] text-[#6B7280] sm:text-base">
-                    MAP
-                  </span>
+              <div className="relative min-h-[360px] sm:min-h-[420px] lg:min-h-[620px] w-full overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-3 shadow-[0_1px_2px_rgba(17,24,39,0.04)]">
+                <div className="relative h-full min-h-[336px] sm:min-h-[396px] lg:min-h-[596px] w-full overflow-hidden rounded-[1.5rem]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222.70290788222178!2d88.41705768583817!3d26.736508014670754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e441213fa6e979%3A0xea21e1373d552dc4!2sNobel's%20Academy%2C%20Champasari!5e0!3m2!1sen!2sin!4v1785714049696!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    className="absolute inset-0 h-full w-full border-0"
+                    title="Conchem Location Map"
+                  />
                 </div>
               </div>
             </div>
@@ -196,38 +213,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="py-8 sm:py-10 lg:py-14">
-        <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {faqItems.map((question) => (
-              <article
-                key={question}
-                className="flex items-center justify-between rounded-[1.5rem] border border-[#E5E7EB] bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-              >
-                <h3 className="text-sm font-semibold leading-6 text-[#111827] sm:text-[15px]">
-                  {question}
-                </h3>
-                <ChevronDown className="h-5 w-5 shrink-0 text-[#C8102E]" aria-hidden="true" />
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <CallToAction
-        title="Ready to Discuss Your Project?"
-        description="Reach out to Conchem and our team will help you identify the right solution for your site or application."
-        primaryLabel="Contact Us"
-        primaryHref="/contact"
-        secondaryLabel="Browse Products"
-        secondaryHref="/products"
-      />
+      <FaqSection />
       </main>
 
       <Footer />

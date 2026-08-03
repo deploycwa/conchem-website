@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cardVariants, previewVariants, durations, prefersReduceMotion } from "../../lib/motion";
 import {
+  ArrowRight,
   Droplets,
   FlameKindling,
   Landmark,
@@ -19,45 +20,63 @@ import Container from "../ui/Container";
 const problems = [
   {
     title: "Water Leakage",
-    description: "Prevent water ingress in roofs, basements and exterior walls.",
+    description: "Prevent water ingress in roofs, slabs, basements and exterior masonry walls.",
     icon: Droplets,
     image: "/images/problems/Water Leakage.png",
     alt: "Leaking roof ceiling with water damage",
+    solutionProduct: "Latex M.P.",
+    solutionSlug: "latex-m-p",
+    solutionTag: "Polymer Waterproofing",
   },
   {
     title: "Damp Walls",
-    description: "Protect interiors from moisture and long-term damage.",
+    description: "Protect interior and exterior plasters from moisture, saltpetre, and long-term decay.",
     icon: ShieldAlert,
     image: "/images/problems/Damp Walls.png",
     alt: "Interior damp wall with moisture stains",
+    solutionProduct: "Damposeal Liquid",
+    solutionSlug: "damposeal-liquid",
+    solutionTag: "Integral Waterproofing",
   },
   {
-    title: "Roof Seepage",
-    description: "Durable waterproofing for terraces and rooftops.",
+    title: "Roof & Slab Seepage",
+    description: "Super-plasticizing integral waterproofing for exposed roofs and water tanks.",
     icon: Landmark,
     image: "/images/problems/Roof Seepage.png",
     alt: "Waterproofing on a terrace roof",
+    solutionProduct: "Damposeal Liquid Gold",
+    solutionSlug: "damposeal-liquid-gold",
+    solutionTag: "Super-Plasticizing",
   },
   {
     title: "Concrete Cracks",
-    description: "Improve durability and structural integrity.",
+    description: "Mortar admixture for crack-free plaster, masonry rendering, and moisture retention.",
     icon: Wrench,
     image: "/images/problems/Concrete Cracks.png",
     alt: "Cracked concrete surface close-up",
+    solutionProduct: "Plastomix",
+    solutionSlug: "plastomix",
+    solutionTag: "Plaster Admixture",
   },
   {
-    title: "Rust Damage",
-    description: "Protect reinforcement steel from corrosion.",
+    title: "Steel Corrosion",
+    description: "Anti-corrosion protective steel rebar coating to halt ongoing rust before repair.",
     icon: Radar,
     image: "/images/problems/Rust Damage.png",
     alt: "Rusted reinforcement steel in concrete",
+    solutionProduct: "Rust Stop",
+    solutionSlug: "rust-stop",
+    solutionTag: "Rebar Protection",
   },
   {
-    title: "Tile Failure",
-    description: "Reliable bonding and adhesive performance.",
+    title: "Tile Slippage & Debonding",
+    description: "Waterproofing additive that enhances bond and tensile strength for marble, granite & tiles.",
     icon: FlameKindling,
     image: "/images/problems/Tile Failure.png",
     alt: "Loose or broken ceramic tiles",
+    solutionProduct: "Tile-O-Mate",
+    solutionSlug: "tile-o-mate",
+    solutionTag: "Tile Adhesion",
   },
 ];
 
@@ -69,7 +88,6 @@ export default function Problems() {
     return true;
   });
   const [teaseIndex, setTeaseIndex] = useState<number | null>(null);
-  
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.matchMedia) {
@@ -85,7 +103,6 @@ export default function Problems() {
     }
   }, []);
 
-  // Random tease logic — only on hover-capable devices and when user hasn't requested reduced motion
   useEffect(() => {
     if (!supportsHover) return;
     if (prefersReduceMotion()) return;
@@ -94,18 +111,16 @@ export default function Problems() {
     let timer: NodeJS.Timeout | null = null;
 
     const scheduleNext = () => {
-      const delay = 10000 + Math.random() * 5000; // 10-15s
-        timer = setTimeout(() => {
+      const delay = 10000 + Math.random() * 5000;
+      timer = setTimeout(() => {
         if (!mounted) return;
         const idx = Math.floor(Math.random() * problems.length);
         setTeaseIndex(idx);
-        // clear tease after a short duration
         setTimeout(() => {
           setTeaseIndex(null);
           if (!mounted) return;
           scheduleNext();
         }, 600);
-        // ensure clearTimer cleaned up if unmount
       }, delay);
     };
 
@@ -117,21 +132,26 @@ export default function Problems() {
     };
   }, [supportsHover]);
 
-  
-
   return (
-    <section className="py-8 sm:py-10 lg:py-14">
+    <section className="py-10 sm:py-14 lg:py-16">
       <Container>
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-4 py-1.5 text-xs font-semibold text-[#C8102E]">
+            <span>🛠️ Site Challenges & Solutions</span>
+          </div>
+
+          <h2 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-[#111827] sm:text-4xl lg:text-5xl">
             Problems We Solve
           </h2>
+
           <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-            Protecting structures starts with solving the most common construction challenges.
+            Targeted chemical formulations engineered to solve critical structural and waterproofing failures on site.
           </p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {/* Problems Grid */}
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {problems.map((problem, i) => {
             const Icon = problem.icon;
 
@@ -153,8 +173,9 @@ export default function Problems() {
                 whileHover={supportsHover ? "hover" : undefined}
                 animate={supportsHover ? (teaseIndex === i ? "tease" : "rest") : "hover"}
                 variants={cardVariants}
-                className="group relative overflow-hidden rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white p-7 shadow-xs transition-all duration-300 hover:border-[#C8102E]/40 hover:shadow-lg"
               >
+                {/* Background Image Preview */}
                 <motion.div
                   className="pointer-events-none absolute inset-0 z-0"
                   variants={previewVariants}
@@ -169,58 +190,75 @@ export default function Problems() {
                     loading="lazy"
                   />
                   <motion.div
-                    className="absolute inset-0 bg-black/50"
-                    variants={{ rest: { opacity: 0 }, hover: { opacity: 0.52 }, tease: { opacity: 0.35 } }}
+                    className="absolute inset-0 bg-black/60"
+                    variants={{ rest: { opacity: 0 }, hover: { opacity: 0.65 }, tease: { opacity: 0.35 } }}
                     transition={{ duration: durations.preview, ease: "easeOut" }}
                   />
                 </motion.div>
 
-                <motion.div className="relative z-10" variants={foregroundVariants} transition={{ duration: 0.2 }}>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
+                {/* Card Main Content */}
+                <motion.div className="relative z-10 flex flex-col justify-between h-full" variants={foregroundVariants} transition={{ duration: 0.2 }}>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                        <Icon className="h-6 w-6" aria-hidden="true" />
+                      </div>
+
+                      <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-semibold text-[#4B5563]">
+                        {problem.solutionTag}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-5 text-xl font-bold tracking-[-0.02em] text-[#111827]">
+                      {problem.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-6 text-[#4B5563]">
+                      {problem.description}
+                    </p>
                   </div>
 
-                  <h3 className="mt-5 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {problem.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {problem.description}
-                  </p>
-
-                  <Link
-                    href="/contact"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors hover:text-[#A30E27]"
-                  >
-                    <span>Learn More</span>
-                    <span aria-hidden="true">→</span>
-                  </Link>
+                  <div className="mt-6 pt-4 border-t border-[#F3F4F6]">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-[#6B7280]">Solution:</span>
+                      <Link
+                        href={`/products/${problem.solutionSlug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C8102E] hover:underline"
+                      >
+                        <span>{problem.solutionProduct}</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </div>
                 </motion.div>
 
+                {/* Hover Reveal Details */}
                 <motion.div
-                  className="pointer-events-none absolute left-6 bottom-6 z-20 text-white text-left uppercase font-bold leading-tight"
+                  className="pointer-events-none absolute left-7 right-7 bottom-7 z-20 text-white text-left font-bold leading-tight"
                   variants={largeTitleVariants}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   initial="rest"
-                  // On non-hover devices, animate when the card scrolls into view
                   whileInView={!supportsHover ? "hover" : undefined}
                   viewport={{ once: true, amount: 0.2 }}
                 >
-                  {problem.title.toUpperCase().split(" ").map((part, idx) => (
-                    <motion.span key={idx} className="block text-3xl sm:text-4xl md:text-5xl" variants={largeTitleVariants}>
-                      {part}
-                    </motion.span>
-                  ))}
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#F3D4D8]">
+                    Conchem Solution: {problem.solutionProduct}
+                  </span>
+                  
+                  <h3 className="mt-2 text-2xl font-bold text-white tracking-tight">
+                    {problem.title}
+                  </h3>
 
-                  <motion.p
-                    className="mt-3 max-w-[70%] text-sm leading-6 text-white/90 normal-case font-normal uppercase:normal-case"
-                    initial={{ y: 10, opacity: 0 }}
-                    whileInView={!supportsHover ? { y: 0, opacity: 1 } : undefined}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.35, ease: "easeOut", delay: 0.05 }}
-                  >
+                  <p className="mt-2 text-xs leading-5 text-white/90 font-normal">
                     {problem.description}
-                  </motion.p>
+                  </p>
+
+                  <div className="mt-4">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-[#C8102E] px-4 py-1.5 text-xs font-bold text-white">
+                      <span>Explore {problem.solutionProduct}</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
                 </motion.div>
               </motion.article>
             );

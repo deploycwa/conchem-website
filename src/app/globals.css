@@ -2,8 +2,9 @@
 
 :root {
   --color-primary: #c8102e;
+  --color-primary-dark: #8b0000;
   --color-foreground: #111827;
-  --color-background: #ffffff;
+  --color-background: #fafcff;
   --color-muted: #f8fafc;
   --color-border: #e5e7eb;
 }
@@ -20,9 +21,28 @@ html {
 
 body {
   margin: 0;
-  background: var(--color-background);
+  background-color: var(--color-background);
+  background-image: 
+    radial-gradient(at 5% 5%, rgba(200, 16, 46, 0.045) 0px, transparent 40%),
+    radial-gradient(at 95% 15%, rgba(200, 16, 46, 0.035) 0px, transparent 35%),
+    radial-gradient(at 50% 50%, rgba(203, 213, 225, 0.12) 0px, transparent 50%),
+    radial-gradient(at 85% 90%, rgba(200, 16, 46, 0.04) 0px, transparent 40%);
+  background-attachment: fixed;
   color: var(--color-foreground);
   font-family: var(--font-body), Inter, sans-serif;
+}
+
+/* Subtle architectural grid pattern overlay */
+.bg-grid-mesh {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(229, 231, 235, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(229, 231, 235, 0.35) 1px, transparent 1px);
+}
+
+/* Logo-inspired Red Ambient Glow Orb */
+.bg-glow-orb {
+  background: radial-gradient(circle, rgba(200, 16, 46, 0.08) 0%, rgba(200, 16, 46, 0) 70%);
 }
 
 h1,
@@ -44,7 +64,6 @@ h6 {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -54,7 +73,6 @@ h6 {
   from {
     transform: translateX(100%);
   }
-
   to {
     transform: translateX(0);
   }

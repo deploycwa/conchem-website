@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
+import SolutionCategories from "../../components/sections/SolutionCategories";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
@@ -108,6 +109,23 @@ const howWeWorkSteps = [
   },
 ];
 
+function SolutionHeroImage({ className }: { className?: string }) {
+  return (
+    <div className={`flex aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto min-h-[240px] sm:min-h-[320px] lg:min-h-[560px] w-full items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] p-3 shadow-[0_1px_2px_rgba(17,24,39,0.04)] ${className || ""}`}>
+      <div className="relative h-full min-h-[216px] sm:min-h-[296px] lg:min-h-[536px] w-full overflow-hidden rounded-[1.5rem] bg-white">
+        <Image
+          src="/images/solutions/solution.png"
+          alt="Conchem Solutions"
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-center"
+          priority
+        />
+      </div>
+    </div>
+  );
+}
+
 export default function SolutionsPage() {
   return (
     <div className="flex min-h-screen flex-col gap-4 px-4 py-4">
@@ -127,6 +145,11 @@ export default function SolutionsPage() {
                 <br />
                 for Every Challenge
               </h1>
+
+              {/* Mobile-only image: right after title and before paragraph (centered) */}
+              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+                <SolutionHeroImage />
+              </div>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 Conchem provides complete waterproofing, repair and protection systems rather than
@@ -151,70 +174,15 @@ export default function SolutionsPage() {
               </div>
             </div>
 
-            <div className="order-2 lg:order-none">
-              <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] border border-[#E5E7EB] bg-[#F8FAFC] px-6 py-10 shadow-[0_1px_2px_rgba(17,24,39,0.04)] sm:min-h-[420px] lg:min-h-[560px]">
-                <div className="relative min-h-[320px] w-full overflow-hidden rounded-[1.5rem] bg-white sm:min-h-[420px] lg:min-h-[560px]">
-                  <Image
-                    src="/images/solutions/solution.png"
-                    alt="Conchem Solutions"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center"
-                    priority
-                  />
-                </div>
-              </div>
+            {/* Desktop-only image */}
+            <div className="hidden lg:block order-2 lg:order-none">
+              <SolutionHeroImage />
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-8 sm:py-10 lg:py-14">
-        <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Our Solutions
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-              Explore system-led solution categories built to address waterproofing, repair and
-              protection needs across different project conditions.
-            </p>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {solutionCategories.map((category) => {
-              const Icon = category.icon;
-
-              return (
-                <article
-                  key={category.title}
-                  className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="mt-5 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {category.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {category.description}
-                  </p>
-
-                  <Link
-                    href="/products"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]"
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+      <SolutionCategories />
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>

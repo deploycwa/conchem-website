@@ -9,6 +9,7 @@ import Container from "../ui/Container";
 import Logo from "../ui/Logo";
 
 const navigationItems = [
+  { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
   { label: "Industries", href: "/industries" },
@@ -16,6 +17,9 @@ const navigationItems = [
 ];
 
 function isActivePath(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -25,7 +29,7 @@ export default function Navbar() {
   const drawerRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const activeLinkClass = "text-[#C8102E]";
+  const activeLinkClass = "text-[#C8102E] font-semibold";
   const inactiveLinkClass = "text-[#111827] hover:text-[#C8102E]";
 
   const menuItems = useMemo(
@@ -94,9 +98,9 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 hidden h-20 border-b border-[#E5E7EB] bg-white md:block">
-        <Container className="flex h-full items-center gap-8">
-          <Link href="/" aria-label="Conchem International Home" className="flex shrink-0 items-center pl-1 sm:pl-2">
+      <header className="sticky top-0 z-50 hidden h-20 md:block">
+        <div className="mx-auto flex h-full w-full max-w-[1380px] items-center justify-between gap-8 rounded-full border border-[#E5E7EB] bg-white/95 px-8 shadow-sm backdrop-blur-md transition-all duration-200 hover:shadow-md lg:px-12">
+          <Link href="/" aria-label="Conchem International Home" className="flex shrink-0 items-center">
             <Logo size="md" priority />
           </Link>
 
@@ -107,7 +111,7 @@ export default function Navbar() {
                   <Link
                     href={item.href}
                     aria-current={item.active ? "page" : undefined}
-                    className={`text-[15px] font-medium transition-colors duration-200 ${
+                    className={`text-[15px] transition-colors duration-200 ${
                       item.active ? activeLinkClass : inactiveLinkClass
                     }`}
                   >
@@ -121,16 +125,16 @@ export default function Navbar() {
           <div className="flex shrink-0 items-center">
             <Link
               href="/contact"
-              className="inline-flex h-11 items-center rounded-lg bg-black px-[20px] text-[15px] font-medium text-white transition-colors duration-200 hover:bg-[#111827]"
+              className="inline-flex h-11 items-center rounded-full bg-[#111827] px-6 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#C8102E]"
             >
               Contact Us
             </Link>
           </div>
-        </Container>
+        </div>
       </header>
 
-      <header className="sticky top-0 z-50 border-b border-[#E5E7EB] bg-white md:hidden">
-        <Container className="flex h-16 items-center justify-between">
+      <header className="sticky top-0 z-50 md:hidden">
+        <div className="mx-auto flex h-16 w-full max-w-[1380px] items-center justify-between rounded-full border border-[#E5E7EB] bg-white/95 px-5 shadow-sm backdrop-blur-md">
           <Link href="/" aria-label="Conchem International Home" className="flex shrink-0 items-center">
             <Logo size="sm" priority />
           </Link>
@@ -149,7 +153,7 @@ export default function Navbar() {
               <Menu className="h-5 w-5" aria-hidden="true" />
             )}
           </button>
-        </Container>
+        </div>
       </header>
       {isMobileMenuOpen ? (
         <div className="fixed inset-0 z-[60] md:hidden pointer-events-auto opacity-100 animate-[conchem-overlay-in_250ms_ease-out]">

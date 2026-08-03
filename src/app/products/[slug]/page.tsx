@@ -6,7 +6,6 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronRight,
-  Download,
   Droplets,
   FlaskConical,
   Layers3,
@@ -165,7 +164,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
-            <div className="order-1 lg:order-none">
+            {/* Desktop gallery column */}
+            <div className="hidden lg:block order-1 lg:order-none">
               <ProductDetailGallery
                 productName={product.name}
                 placeholderText={product.imagePlaceholder}
@@ -182,6 +182,15 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <h1 className="mt-4 text-[clamp(2.25rem,4vw,4rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
                 {product.name}
               </h1>
+
+              {/* Mobile-only gallery image: right after title and before paragraph (centered) */}
+              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+                <ProductDetailGallery
+                  productName={product.name}
+                  placeholderText={product.imagePlaceholder}
+                  gallery={productGallery}
+                />
+              </div>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 {product.fullDescription}
@@ -214,16 +223,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <Button type="button" className="h-12 rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]">
-                  Request Quote
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 rounded-full border-[#D1D5DB] bg-white px-8 text-sm font-semibold text-[#111827] transition-colors hover:border-[#9CA3AF] hover:bg-[#F9FAFB]"
+                <Link
+                  href="/contact"
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
                 >
-                  Download Datasheet
-                </Button>
+                  Request Quote
+                </Link>
               </div>
             </div>
           </div>
@@ -298,6 +303,59 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </section>
       )}
 
+      {((product.instructions && product.instructions.length > 0) || product.dosage || product.mixingRatio) && (
+        <section className="py-8 sm:py-10 lg:py-14">
+          <Container>
+            <div className="max-w-2xl">
+              <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
+                Application & Dosing Instructions
+              </h2>
+              <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
+                Mixing guidelines and application procedures for best results on site.
+              </p>
+            </div>
+
+            <div className="mt-8 space-y-6">
+              {product.dosage && (
+                <div className="rounded-[1.5rem] border border-[#F3D4D8] bg-[#FFF7F8] p-6">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
+                    Recommended Dosage
+                  </h3>
+                  <p className="mt-2 text-base font-semibold text-[#111827]">{product.dosage}</p>
+                </div>
+              )}
+
+              {product.mixingRatio && (
+                <div className="rounded-[1.5rem] border border-[#E5E7EB] bg-[#FAFAFA] p-6">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-[#6B7280]">
+                    Mixing Ratio
+                  </h3>
+                  <p className="mt-2 text-base font-semibold text-[#111827]">{product.mixingRatio}</p>
+                </div>
+              )}
+
+              {product.instructions && product.instructions.length > 0 && (
+                <div className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6">
+                  <h3 className="text-lg font-semibold tracking-[-0.02em] text-[#111827]">
+                    Step-by-Step Instructions
+                  </h3>
+                  <ol className="mt-4 space-y-3">
+                    {product.instructions.map((step, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-[#374151] sm:text-[15px]">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#111827] text-xs font-semibold text-white">
+                          {idx + 1}
+                        </span>
+                        <span className="mt-0.5 leading-6">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+            </div>
+          </Container>
+        </section>
+      )}
+
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
           <div className="max-w-2xl">
@@ -343,40 +401,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </Container>
       </section>
 
-      <section className="py-8 sm:py-10 lg:py-14">
-        <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Downloads
-            </h2>
-          </div>
 
-          {product.downloads.length > 0 ? (
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {product.downloads.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Download className="h-5 w-5" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="mt-4 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-8 text-sm text-[#6B7280]">No downloads are currently available for this product.</p>
-          )}
-        </Container>
-      </section>
 
       {relatedProducts.length > 0 && (
         <section className="py-8 sm:py-10 lg:py-14">

@@ -18,6 +18,7 @@ import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 import Container from "../../components/ui/Container";
 import IndustryImage from "../../components/ui/IndustryImage";
+import Industries from "../../components/sections/Industries";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
@@ -126,6 +127,11 @@ export default function IndustriesPage() {
                 Every Industry
               </h1>
 
+              {/* Mobile-only image: right after title and before paragraph (centered) */}
+              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
+                <IndustryImage priority />
+              </div>
+
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 Conchem products are used across residential, commercial, infrastructure and
                 industrial projects, with systems built to match the needs of each environment.
@@ -149,59 +155,15 @@ export default function IndustriesPage() {
               </div>
             </div>
 
-            <div className="order-2 lg:order-none">
+            {/* Desktop-only image */}
+            <div className="hidden lg:block order-2 lg:order-none">
               <IndustryImage priority />
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-8 sm:py-10 lg:py-14">
-        <Container>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">
-              Industries We Serve
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
-              From homes and campuses to factories and public infrastructure, our solutions are
-              shaped for real project requirements.
-            </p>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {industryCards.map((industry) => {
-              const Icon = industry.icon;
-
-              return (
-                <article
-                  key={industry.title}
-                  className="group rounded-[1.5rem] border border-[#E5E7EB] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(17,24,39,0.05)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="mt-5 text-xl font-semibold tracking-[-0.02em] text-[#111827]">
-                    {industry.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-6 text-[#4B5563] sm:text-[15px]">
-                    {industry.description}
-                  </p>
-
-                  <Link
-                    href="/products"
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#C8102E] transition-colors group-hover:text-[#A30E27]"
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+      <Industries showLink={false} />
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>

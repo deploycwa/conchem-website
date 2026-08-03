@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter, Manrope } from "next/font/google";
 
 import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
+import FloatingContact from "@/src/components/ui/FloatingContact";
 import { company } from "@/data/company";
 import { images } from "@/data/images";
 
@@ -82,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={manrope.variable + " " + inter.variable}>
-      <body className="min-h-full">
+      <body className="relative min-h-full overflow-x-hidden antialiased selection:bg-[#C8102E] selection:text-white">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-[#111827] focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
@@ -90,6 +91,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <FloatingContact />
         <AnalyticsProvider />
       </body>
     </html>
