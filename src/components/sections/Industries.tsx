@@ -120,7 +120,7 @@ export default function Industries({ showLink = true }: { showLink?: boolean }) 
   }, [supportsHover]);
 
   return (
-    <section className="py-8 sm:py-10 lg:py-14">
+    <section id="industries-grid" className="py-8 sm:py-10 lg:py-14">
       <Container>
         <MotionSection direction="right">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

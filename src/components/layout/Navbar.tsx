@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, MessageCircle, Phone, X } from "lucide-react";
 
 import Container from "../ui/Container";
 import Logo from "../ui/Logo";
+import { company } from "@/data/company";
 
 const navigationItems = [
   { label: "Home", href: "/" },
@@ -210,14 +211,32 @@ export default function Navbar() {
               </ul>
             </nav>
 
-            <div className="border-t border-[#E5E7EB] px-4 py-4">
+            <div className="border-t border-[#E5E7EB] space-y-2.5 px-4 py-4">
               <Link
                 href="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-black px-[20px] text-[15px] font-medium text-white transition-colors duration-200 hover:bg-[#111827]"
+                className="inline-flex h-12 w-full items-center justify-center rounded-full bg-[#111827] text-[15px] font-semibold text-white transition-all active:scale-[0.98]"
               >
                 Contact Us
               </Link>
+
+              <a
+                href={`https://wa.me/${company.phone.primary.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 text-xs font-semibold text-[#128C7E] transition-all active:scale-[0.98]"
+              >
+                <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                <span>WhatsApp Support</span>
+              </a>
+
+              <a
+                href={company.phone.primaryHref}
+                className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-[#E5E7EB] bg-[#FAFAFA] text-xs font-semibold text-[#111827] transition-all active:scale-[0.98]"
+              >
+                <Phone className="h-4 w-4 text-[#C8102E]" />
+                <span>Call +91 9641335076</span>
+              </a>
             </div>
           </div>
         </div>

@@ -157,12 +157,12 @@ export default function SolutionsPage() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <Button
-                  type="button"
-                  className="h-12 rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
+                <Link
+                  href="#solution-categories"
+                  className="inline-flex h-12 items-center justify-center rounded-full bg-[#111827] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#1F2937]"
                 >
                   Explore Solutions
-                </Button>
+                </Link>
 
                 <Link
                   href="/contact"

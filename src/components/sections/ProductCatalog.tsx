@@ -189,7 +189,7 @@ export default function ProductCatalog() {
                       value={searchQuery}
                       onChange={(e) => handleSearchChange(e.target.value)}
                       placeholder="Search products..."
-                      className="h-12 w-full rounded-full border border-[#D1D5DB] bg-white pl-11 pr-10 text-sm text-[#111827] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
+                      className="h-12 w-full rounded-full border border-[#D1D5DB] bg-white pl-11 pr-10 text-base sm:text-sm text-[#111827] outline-none transition-colors placeholder:text-[#9CA3AF] focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
                     />
                     {searchQuery ? (
                       <button
@@ -213,7 +213,7 @@ export default function ProductCatalog() {
                     id="category-filter"
                     value={selectedCategory}
                     onChange={(e) => handleCategoryChange(e.target.value)}
-                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
+                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-base sm:text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
                   >
                     <option value="">All Categories</option>
                     {CATEGORIES.map((c) => (
@@ -233,7 +233,7 @@ export default function ProductCatalog() {
                     id="application-filter"
                     value={selectedApplication}
                     onChange={(e) => handleApplicationChange(e.target.value)}
-                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
+                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-base sm:text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
                   >
                     <option value="">All Applications</option>
                     {availableApplications.map((app) => (
@@ -253,7 +253,7 @@ export default function ProductCatalog() {
                     id="package-filter"
                     value={selectedSize}
                     onChange={(e) => handleSizeChange(e.target.value)}
-                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
+                    className="mt-2 h-12 w-full rounded-full border border-[#D1D5DB] bg-white px-4 text-base sm:text-sm text-[#111827] outline-none transition-colors focus:border-[#C8102E] focus:ring-1 focus:ring-[#C8102E]"
                   >
                     <option value="">All Sizes</option>
                     {availablePackageSizes.map((size) => (

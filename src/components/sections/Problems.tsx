@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import Container from "../ui/Container";
+import { triggerHaptic } from "@/src/lib/haptics";
 
 const problems = [
   {
@@ -167,100 +168,103 @@ export default function Problems() {
             };
 
             return (
-              <motion.article
+              <Link
                 key={problem.title}
-                initial="rest"
-                whileHover={supportsHover ? "hover" : undefined}
-                animate={supportsHover ? (teaseIndex === i ? "tease" : "rest") : "hover"}
-                variants={cardVariants}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white p-7 shadow-xs transition-all duration-300 hover:border-[#C8102E]/40 hover:shadow-lg"
+                href={`/products/${problem.solutionSlug}`}
+                onClick={() => triggerHaptic(12)}
+                className="block h-full cursor-pointer focus:outline-none"
               >
-                {/* Background Image Preview */}
-                <motion.div
-                  className="pointer-events-none absolute inset-0 z-0"
-                  variants={previewVariants}
-                  transition={{ duration: durations.preview, ease: "easeOut" }}
+                <motion.article
+                  initial="rest"
+                  whileHover={supportsHover ? "hover" : undefined}
+                  animate={supportsHover ? (teaseIndex === i ? "tease" : "rest") : "hover"}
+                  variants={cardVariants}
+                  className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-[#E5E7EB] bg-white p-7 shadow-xs transition-all duration-300 hover:border-[#C8102E]/40 hover:shadow-lg active:scale-[0.99]"
                 >
-                  <Image
-                    src={problem.image}
-                    alt={problem.alt}
-                    fill
-                    className="object-cover"
-                    priority={false}
-                    loading="lazy"
-                  />
+                  {/* Background Image Preview */}
                   <motion.div
-                    className="absolute inset-0 bg-black/60"
-                    variants={{ rest: { opacity: 0 }, hover: { opacity: 0.65 }, tease: { opacity: 0.35 } }}
+                    className="pointer-events-none absolute inset-0 z-0"
+                    variants={previewVariants}
                     transition={{ duration: durations.preview, ease: "easeOut" }}
-                  />
-                </motion.div>
+                  >
+                    <Image
+                      src={problem.image}
+                      alt={problem.alt}
+                      fill
+                      className="object-cover"
+                      priority={false}
+                      loading="lazy"
+                    />
+                    <motion.div
+                      className="absolute inset-0 bg-black/60"
+                      variants={{ rest: { opacity: 0 }, hover: { opacity: 0.65 }, tease: { opacity: 0.35 } }}
+                      transition={{ duration: durations.preview, ease: "easeOut" }}
+                    />
+                  </motion.div>
 
-                {/* Card Main Content */}
-                <motion.div className="relative z-10 flex flex-col justify-between h-full" variants={foregroundVariants} transition={{ duration: 0.2 }}>
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
-                        <Icon className="h-6 w-6" aria-hidden="true" />
+                  {/* Card Main Content */}
+                  <motion.div className="relative z-10 flex flex-col justify-between h-full" variants={foregroundVariants} transition={{ duration: 0.2 }}>
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#F3D4D8] bg-[#FFF7F8] text-[#C8102E]">
+                          <Icon className="h-6 w-6" aria-hidden="true" />
+                        </div>
+
+                        <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-semibold text-[#4B5563]">
+                          {problem.solutionTag}
+                        </span>
                       </div>
 
-                      <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-1 text-xs font-semibold text-[#4B5563]">
-                        {problem.solutionTag}
-                      </span>
+                      <h3 className="mt-5 text-xl font-bold tracking-[-0.02em] text-[#111827]">
+                        {problem.title}
+                      </h3>
+
+                      <p className="mt-3 text-sm leading-6 text-[#4B5563]">
+                        {problem.description}
+                      </p>
                     </div>
 
-                    <h3 className="mt-5 text-xl font-bold tracking-[-0.02em] text-[#111827]">
+                    <div className="mt-6 pt-4 border-t border-[#F3F4F6]">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-[#6B7280]">Solution:</span>
+                        <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C8102E] group-hover:underline">
+                          <span>{problem.solutionProduct}</span>
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Hover Reveal Details */}
+                  <motion.div
+                    className="pointer-events-none absolute left-7 right-7 bottom-7 z-20 text-white text-left font-bold leading-tight"
+                    variants={largeTitleVariants}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    initial="rest"
+                    whileInView={!supportsHover ? "hover" : undefined}
+                    viewport={{ once: true, amount: 0.2 }}
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#F3D4D8]">
+                      Conchem Solution: {problem.solutionProduct}
+                    </span>
+                    
+                    <h3 className="mt-2 text-2xl font-bold text-white tracking-tight">
                       {problem.title}
                     </h3>
 
-                    <p className="mt-3 text-sm leading-6 text-[#4B5563]">
+                    <p className="mt-2 text-xs leading-5 text-white/90 font-normal">
                       {problem.description}
                     </p>
-                  </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#F3F4F6]">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-[#6B7280]">Solution:</span>
-                      <Link
-                        href={`/products/${problem.solutionSlug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C8102E] hover:underline"
-                      >
-                        <span>{problem.solutionProduct}</span>
+                    <div className="mt-4">
+                      <span className="inline-flex items-center gap-2 rounded-full bg-[#C8102E] px-4 py-1.5 text-xs font-bold text-white shadow-md">
+                        <span>Explore {problem.solutionProduct}</span>
                         <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
+                      </span>
                     </div>
-                  </div>
-                </motion.div>
-
-                {/* Hover Reveal Details */}
-                <motion.div
-                  className="pointer-events-none absolute left-7 right-7 bottom-7 z-20 text-white text-left font-bold leading-tight"
-                  variants={largeTitleVariants}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  initial="rest"
-                  whileInView={!supportsHover ? "hover" : undefined}
-                  viewport={{ once: true, amount: 0.2 }}
-                >
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#F3D4D8]">
-                    Conchem Solution: {problem.solutionProduct}
-                  </span>
-                  
-                  <h3 className="mt-2 text-2xl font-bold text-white tracking-tight">
-                    {problem.title}
-                  </h3>
-
-                  <p className="mt-2 text-xs leading-5 text-white/90 font-normal">
-                    {problem.description}
-                  </p>
-
-                  <div className="mt-4">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-[#C8102E] px-4 py-1.5 text-xs font-bold text-white">
-                      <span>Explore {problem.solutionProduct}</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </motion.div>
-              </motion.article>
+                  </motion.div>
+                </motion.article>
+              </Link>
             );
           })}
         </div>

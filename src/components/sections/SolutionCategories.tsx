@@ -115,7 +115,7 @@ export default function SolutionCategories() {
   }, [supportsHover]);
 
   return (
-    <section className="py-8 sm:py-10 lg:py-14">
+    <section id="solution-categories" className="py-8 sm:py-10 lg:py-14">
       <Container>
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold tracking-[-0.03em] text-[#111827] sm:text-4xl">

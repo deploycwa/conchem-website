@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
@@ -5,6 +7,7 @@ import Container from "../ui/Container";
 import HeroImage from "../ui/HeroImage";
 import MotionSection from "../ui/MotionSection";
 import { company } from "@/data/company";
+import { triggerHaptic } from "@/src/lib/haptics";
 
 export default function Hero() {
   return (
@@ -73,7 +76,8 @@ export default function Hero() {
                   <Link
                     key={pill.label}
                     href={pill.href}
-                    className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-white/80 px-3.5 py-1.5 text-xs font-medium text-[#111827] shadow-xs backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C8102E]/40 hover:bg-[#FFF7F8] hover:text-[#C8102E] hover:shadow-sm"
+                    onClick={() => triggerHaptic(12)}
+                    className="inline-flex items-center rounded-full border border-[#E5E7EB] bg-white/80 px-3.5 py-1.5 text-xs font-medium text-[#111827] shadow-xs backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C8102E]/40 hover:bg-[#FFF7F8] hover:text-[#C8102E] hover:shadow-sm active:scale-95"
                   >
                     {pill.label}
                   </Link>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import Container from "../ui/Container";
 import Logo from "../ui/Logo";
@@ -85,16 +86,37 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-[#E5E7EB] py-5 text-sm text-[#4B5563] sm:flex-row sm:items-center sm:justify-between">
-          <p>{company.copyright}</p>
+        <div className="flex flex-col gap-4 border-t border-[#E5E7EB] py-6 text-sm text-[#4B5563] sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-[#6B7280]">{company.copyright}</p>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
-              Privacy Policy
-            </Link>
-            <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
-              Terms
-            </Link>
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+            <div className="flex items-center gap-2 text-xs text-[#6B7280]">
+              <span>Designed and Developed by</span>
+              <a
+                href="https://nbitlabs.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center transition-opacity hover:opacity-80"
+              >
+                <Image
+                  src="/images/logo/nbitlabs.svg"
+                  alt="nBit Labs"
+                  width={120}
+                  height={28}
+                  className="h-5 sm:h-6 w-auto object-contain"
+                />
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4 text-xs">
+              <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
+                Privacy Policy
+              </Link>
+              <span className="text-[#D1D5DB]">•</span>
+              <Link href="/contact" className="transition-colors hover:text-[#C8102E]">
+                Terms
+              </Link>
+            </div>
           </div>
         </div>
       </Container>

@@ -163,9 +163,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       <section className="py-8 sm:py-10 lg:py-14">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
-            {/* Desktop gallery column */}
-            <div className="hidden lg:block order-1 lg:order-none">
+          <div className="grid gap-8 lg:grid-cols-[55fr_45fr] lg:items-start lg:gap-10">
+            {/* Product gallery column */}
+            <div className="w-full max-w-lg mx-auto lg:max-w-none">
               <ProductDetailGallery
                 productName={product.name}
                 placeholderText={product.imagePlaceholder}
@@ -173,7 +173,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               />
             </div>
 
-            <div className="order-2 max-w-2xl lg:order-none">
+            <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#F3D4D8] bg-[#FFF7F8] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#C8102E]">
                 {React.createElement(categoryIcon, { className: "h-3.5 w-3.5", "aria-hidden": "true" })}
                 {product.category}
@@ -182,15 +182,6 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <h1 className="mt-4 text-[clamp(2.25rem,4vw,4rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-[#111827]">
                 {product.name}
               </h1>
-
-              {/* Mobile-only gallery image: right after title and before paragraph (centered) */}
-              <div className="mt-6 mx-auto flex w-full max-w-lg justify-center lg:hidden">
-                <ProductDetailGallery
-                  productName={product.name}
-                  placeholderText={product.imagePlaceholder}
-                  gallery={productGallery}
-                />
-              </div>
 
               <p className="mt-5 max-w-2xl text-base leading-7 text-[#4B5563] sm:text-lg sm:leading-8">
                 {product.fullDescription}

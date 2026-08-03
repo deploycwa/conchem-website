@@ -50,8 +50,8 @@ export default function ProductDetailGallery({ productName, placeholderText, gal
                 className="block w-full rounded-[1.25rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8102E]"
               >
                 <div
-                  className={`relative h-[110px] w-full overflow-hidden rounded-[1.25rem] border bg-[#F8FAFC] sm:h-[140px] lg:h-[160px] ${
-                    isSelected ? "border-[#C8102E]" : "border-[#E5E7EB]"
+                  className={`relative h-[110px] w-full overflow-hidden rounded-[1.25rem] border bg-[#F1F5F9] sm:h-[140px] lg:h-[160px] ${
+                    isSelected ? "border-[#C8102E] ring-2 ring-[#C8102E]/20" : "border-[#E5E7EB]"
                   }`}
                 >
                   <Image
@@ -59,7 +59,7 @@ export default function ProductDetailGallery({ productName, placeholderText, gal
                     alt={`${productName} thumbnail ${position + 1}`}
                     fill
                     sizes="(max-width: 768px) 33vw, 160px"
-                    className="object-cover object-center"
+                    className="rounded-[1.25rem] object-cover object-center"
                   />
                 </div>
               </button>

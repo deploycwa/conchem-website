@@ -4,9 +4,15 @@ import { useState } from "react";
 import { MessageCircle, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { company } from "@/data/company";
+import { triggerHaptic } from "@/src/lib/haptics";
 
 export default function FloatingContact() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => {
+    triggerHaptic(15);
+    setIsOpen((prev) => !prev);
+  };
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -25,7 +31,10 @@ export default function FloatingContact() {
               </span>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  triggerHaptic(10);
+                  setIsOpen(false);
+                }}
                 className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
                 aria-label="Close contact menu"
               >
@@ -41,6 +50,7 @@ export default function FloatingContact() {
               href={`https://wa.me/${company.phone.primary.replace(/[^0-9]/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => triggerHaptic(15)}
               className="flex items-center gap-3 rounded-xl bg-[#25D366] px-4 py-2.5 text-xs font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               <MessageCircle className="h-4 w-4 fill-white" />
@@ -49,6 +59,7 @@ export default function FloatingContact() {
 
             <a
               href={company.phone.primaryHref}
+              onClick={() => triggerHaptic(15)}
               className="flex items-center gap-3 rounded-xl bg-[#111827] px-4 py-2.5 text-xs font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.98]"
             >
               <Phone className="h-4 w-4" />
@@ -60,7 +71,7 @@ export default function FloatingContact() {
 
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleOpen}
         className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#C8102E] text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95"
         aria-label="Contact Technical Support"
       >
